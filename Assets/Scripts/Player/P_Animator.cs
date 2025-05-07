@@ -6,6 +6,8 @@ public class P_Animator : MonoBehaviour
 
     private int jumpHash = Animator.StringToHash("jump");
     private int isOnGroundHash = Animator.StringToHash("isOnGround");
+    private int useSkillHash = Animator.StringToHash("useSkill");
+    private int skillIndexHash = Animator.StringToHash("skillIndex");
 
     private void Awake()
     {
@@ -20,5 +22,10 @@ public class P_Animator : MonoBehaviour
     public void Public_Land()
     {
         anim.SetBool(isOnGroundHash, true);
+    }
+    public void Public_UseSkill(int index)
+    { 
+        anim.SetInteger(skillIndexHash, index);
+        anim.SetTrigger(useSkillHash);
     }
 }

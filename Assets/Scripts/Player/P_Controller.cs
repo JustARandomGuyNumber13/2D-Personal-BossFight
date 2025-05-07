@@ -13,8 +13,8 @@ public class P_Controller : MonoBehaviour
     private readonly int moveAnimHash = Animator.StringToHash("moveInput");
     
     private bool isOnGround;
-    public bool IsCanMove = true;
-    public bool IsCanUseSkill = true;
+    private bool isCanMove = true;
+    private bool isCanUseSkill = true;
 
     private Rigidbody2D rb;
     private Animator anim; // Only for horizontal movement
@@ -22,8 +22,8 @@ public class P_Controller : MonoBehaviour
     [SerializeField] private UnityEvent<bool> OnJumpEvent; // isOnGround
     [SerializeField] private UnityEvent<bool> OnLandEvent; // isOnGround
     [SerializeField] private UnityEvent<bool> OnBasicAttackEvent; // isCanUseSkill
-    [SerializeField] private UnityEvent<P_Controller> OnSkillOneEvent; // this
-    [SerializeField] private UnityEvent<P_Controller> OnSkillTwoEvent; // this
+    [SerializeField] private UnityEvent<bool> OnSkillOneEvent; // isCanUseSkill
+    [SerializeField] private UnityEvent<bool> OnSkillTwoEvent; // isCanUseSkill
 
 
     /* Monobehavior methods */
@@ -46,18 +46,20 @@ public class P_Controller : MonoBehaviour
     /* Action handlers */
     private void Action_Move()
     {
-        if (IsCanMove)
+        if (isCanMove)
         {
             rb.linearVelocityX = moveInput * charStat.MoveSpeed;
 
+            if (moveInput != 0 && moveInput != transform.localScale.x)
+                transform.localScale = new Vector3(moveInput, 1, 1);
+            
             if (anim.GetInteger(moveAnimHash) != moveInput)
                 anim.SetInteger(moveAnimHash, moveInput);
         }
     }
-
     private void Action_Jump()
     {
-        if (!IsCanMove || !IsCanUseSkill || !isOnGround) return;
+        if (!isCanMove || !isCanUseSkill || !isOnGround) return;
 
         rb.linearVelocityY = 0;
         rb.AddForce(Vector2.up * charStat.JumpForce, ForceMode2D.Impulse);
@@ -84,16 +86,27 @@ public class P_Controller : MonoBehaviour
     { 
         moveInput = (int) Mathf.Ceil(value.Get<float>());
     }
-    private void OnJump()
+    private void OnJump(InputValue value)
     {
-        Action_Jump();
+        if(Mathf.Ceil(value.Get<float>()) == 1)
+            Action_Jump();
+    }
+    private void OnBasicAttack()
+    {
+        OnBasicAttackEvent?.Invoke(isCanUseSkill);
     }
     private void OnSkillOne()
     {
-        OnSkillOneEvent?.Invoke(this);
+        OnSkillOneEvent?.Invoke(isCanUseSkill);
     }
     private void OnSkillTwo()
     {
-        OnSkillTwoEvent?.Invoke(this);
+        OnSkillTwoEvent?.Invoke(isCanUseSkill);
     }
+
+    /* Public methods */
+    public void Public_StopMove()
+    { rb.linearVelocityX = 0; }
+    public void Public_SetIsCanMove(bool value) { isCanMove = value; }
+    public void Public_SetIsCanUseSkill(bool value) { isCanUseSkill = value; }
 }

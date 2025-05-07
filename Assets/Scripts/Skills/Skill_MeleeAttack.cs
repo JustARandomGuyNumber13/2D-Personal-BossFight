@@ -8,6 +8,10 @@ public class Skill_MeleeAttack : Skill
     {
         col = GetComponent<Collider2D>();
     }
+    private void Start()
+    {
+        col.enabled = false;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == Global.EnemyLayerIndex)

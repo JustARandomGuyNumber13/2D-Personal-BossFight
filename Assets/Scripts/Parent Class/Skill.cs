@@ -5,7 +5,6 @@ using UnityEngine.Events;
 public class Skill : MonoBehaviour
 {
     [SerializeField] private SO_SkillStat skillStat;
-    [SerializeField] private P_Controller p;
 
     [SerializeField] private UnityEvent OnSkillDelayEvent;
     [SerializeField] private UnityEvent OnSkillTriggerEvent;
@@ -58,15 +57,13 @@ public class Skill : MonoBehaviour
 
 
     /* Public handlers */
-    public void Public_ActivateSkill(P_Controller p) 
+    public void Public_ActivateSkill(bool isCanUseSkill) 
     {
-        if (!p.IsCanUseSkill || (skillState != SkillState.Ready)) return;
-
+        if (!isCanUseSkill || (skillState != SkillState.Ready)) return;
+        
         OnSkillDelay();
         OnSkillDelayEvent?.Invoke(); 
         skillState = SkillState.Delay;
-        p.IsCanUseSkill = false;
-        this.p = p;
         this.enabled = true;
     }
     public void Public_DeactivateSkill()
@@ -80,15 +77,7 @@ public class Skill : MonoBehaviour
 
 
     /* Phases handlers */
-    protected virtual void OnSkillDelay() 
-    {
-        p.IsCanMove = false;
-        p.IsCanUseSkill = false;
-    }
+    protected virtual void OnSkillDelay() { }
     protected virtual void OnSkillTrigger() { }
-    protected virtual void OnSkillEnd() 
-    {
-        p.IsCanUseSkill = true;
-        p.IsCanMove = true;
-    }
+    protected virtual void OnSkillEnd() { }
 }

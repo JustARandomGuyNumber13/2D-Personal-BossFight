@@ -28,13 +28,13 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: Circle
+    path: Circle-CharSprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -44,18 +44,18 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.72599363
+        value: 0.92939377
         inSlope: 0
         outSlope: 0
         tangentMode: 136
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: Circle
+    path: Circle-CharSprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -70,13 +70,13 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: Circle
+    path: Circle-CharSprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -89,7 +89,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3541786703
+      path: 1647108613
       attribute: 2526845255
       script: {fileID: 0}
       typeID: 212
@@ -98,7 +98,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 3541786703
+      path: 1647108613
       attribute: 4215373228
       script: {fileID: 0}
       typeID: 212
@@ -107,7 +107,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 3541786703
+      path: 1647108613
       attribute: 2334886179
       script: {fileID: 0}
       typeID: 212
@@ -148,13 +148,13 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.r
-    path: Circle
+    path: Circle-CharSprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -164,18 +164,18 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.72599363
+        value: 0.92939377
         inSlope: 0
         outSlope: 0
         tangentMode: 136
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.g
-    path: Circle
+    path: Circle-CharSprite
     classID: 212
     script: {fileID: 0}
     flags: 0
@@ -190,13 +190,13 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Color.b
-    path: Circle
+    path: Circle-CharSprite
     classID: 212
     script: {fileID: 0}
     flags: 0
