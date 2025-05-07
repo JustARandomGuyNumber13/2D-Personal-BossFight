@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SO_CharStat_P_Fighter
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  jumpForce: 0
-  maxHealth: 0
-  defenseValue: 0
+  jumpForce: 18
+  maxHealth: 100
+  defenseValue: 2

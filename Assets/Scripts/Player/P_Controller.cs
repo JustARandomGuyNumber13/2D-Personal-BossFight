@@ -1,54 +1,99 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class P_Controller : MonoBehaviour
 {
     [SerializeField] private SO_CharStat charStat;
-    [SerializeField] private float groundCheckDistant = 0.5f;
     
+    [SerializeField] private float groundCheckDistance = 0.6f;
     
-    private float moveInput;
-    
+    private int moveInput;
 
+    private readonly int moveAnimHash = Animator.StringToHash("moveInput");
+    
     private bool isOnGround;
-    private bool isCanMove;
-    private bool IsCanUseSkill;
+    public bool IsCanMove = true;
+    public bool IsCanUseSkill = true;
 
-    [SerializeField] private UnityEvent OnMoveEvent;
+    private Rigidbody2D rb;
+    private Animator anim; // Only for horizontal movement
+
     [SerializeField] private UnityEvent<bool> OnJumpEvent; // isOnGround
     [SerializeField] private UnityEvent<bool> OnLandEvent; // isOnGround
     [SerializeField] private UnityEvent<bool> OnBasicAttackEvent; // isCanUseSkill
-    [SerializeField] private UnityEvent<bool> OnSkillOneEvent; // isCanUseSkill
-    [SerializeField] private UnityEvent<bool> OnSkillTwoEvent; // isCanUseSkill
+    [SerializeField] private UnityEvent<P_Controller> OnSkillOneEvent; // this
+    [SerializeField] private UnityEvent<P_Controller> OnSkillTwoEvent; // this
 
+
+    /* Monobehavior methods */
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+    }
     private void Update()
     {
-        if (isCanMove)
-        { 
-            
-
-        }
+        Action_Move();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if ((collision.gameObject.layer == Global.GroundLayerIndex))
             Helper_GroundCheck(collision);
     }
-    private void OnCollisionExit2D(Collision2D collision)
+
+
+    /* Action handlers */
+    private void Action_Move()
     {
-        if ((collision.gameObject.layer == Global.GroundLayerIndex))
-            Helper_GroundCheck(collision);
+        if (IsCanMove)
+        {
+            rb.linearVelocityX = moveInput * charStat.MoveSpeed;
+
+            if (anim.GetInteger(moveAnimHash) != moveInput)
+                anim.SetInteger(moveAnimHash, moveInput);
+        }
     }
 
+    private void Action_Jump()
+    {
+        if (!IsCanMove || !IsCanUseSkill || !isOnGround) return;
+
+        rb.linearVelocityY = 0;
+        rb.AddForce(Vector2.up * charStat.JumpForce, ForceMode2D.Impulse);
+        isOnGround = false;
+        OnJumpEvent?.Invoke(isOnGround);
+    }
+
+
+    /* Helper methods */
     private void Helper_GroundCheck(Collision2D collision)
     {
-       RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistant, Global.GroundLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, Global.GroundLayer);
+
         if (hit.collider != null)
         {
             isOnGround = true;
             OnLandEvent?.Invoke(isOnGround);
         }
-        else
-            isOnGround = false;
+    }
+
+
+    /* Input handlers*/
+    private void OnMove(InputValue value)
+    { 
+        moveInput = (int) Mathf.Ceil(value.Get<float>());
+    }
+    private void OnJump()
+    {
+        Action_Jump();
+    }
+    private void OnSkillOne()
+    {
+        OnSkillOneEvent?.Invoke(this);
+    }
+    private void OnSkillTwo()
+    {
+        OnSkillTwoEvent?.Invoke(this);
     }
 }
