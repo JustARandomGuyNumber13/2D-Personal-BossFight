@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 public class P_Controller : MonoBehaviour
 {
     [SerializeField] private P_Stat stat;
-    [SerializeField] private float groundCheckDistance = 0.6f;
+    [SerializeField] private Vector3 groundCheckBoxSize;
+    [SerializeField] private Vector3 groundCheckBoxOffset;
     
     private Rigidbody2D rb;
     private Animator anim; // Only for horizontal movement
@@ -34,6 +35,11 @@ public class P_Controller : MonoBehaviour
         if ((collision.gameObject.layer == Global.GroundLayerIndex))
             Helper_GroundCheck(collision);
     }
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawCube(transform.position + groundCheckBoxOffset, groundCheckBoxSize);
+    //}
 
 
     /* Action handlers */
@@ -64,7 +70,7 @@ public class P_Controller : MonoBehaviour
     /* Helper methods */
     private void Helper_GroundCheck(Collision2D collision)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, Global.GroundLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position + groundCheckBoxOffset, groundCheckBoxSize, 0, Vector2.zero, 0, Global.GroundLayer);
 
         if (hit.collider != null)
         {

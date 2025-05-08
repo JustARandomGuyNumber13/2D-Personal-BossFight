@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6822814036869383293}
   - component: {fileID: 859932493616973595}
   - component: {fileID: 1324753494031218047}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circle-Skill_Leap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 3576682650076443985}
   - component: {fileID: 1414039006062956006}
   - component: {fileID: 4428242402839805568}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circle-Skill_BloodThirst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 4095836088408486238}
   - component: {fileID: 3729621482572387713}
   - component: {fileID: 3599129767982572315}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Circle-Fighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,7 +579,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stat: {fileID: 8006996509933729976}
-  groundCheckDistance: 0.6
+  groundCheckBoxSize: {x: 0.7, y: 0.1, z: 0}
+  groundCheckBoxOffset: {x: 0, y: -0.55, z: 0}
   OnJumpEvent:
     m_PersistentCalls:
       m_Calls:
@@ -755,7 +756,7 @@ GameObject:
   - component: {fileID: 1157297434699906906}
   - component: {fileID: 7548774272138280164}
   - component: {fileID: 8706624734414241215}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circle-Skill_BasicAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

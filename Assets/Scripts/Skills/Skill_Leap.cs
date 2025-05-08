@@ -25,11 +25,11 @@ public class Skill_Leap : Skill
     {
         col = GetComponent<Collider2D>();
     }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawCube(transform.position + (Vector3)dmgRectangleOffset, dmgRectangleSize);
-    }
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawCube(transform.position + (Vector3)dmgRectangleOffset, dmgRectangleSize);
+    //}
 
     protected override void OnSkillTrigger()
     {
