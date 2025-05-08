@@ -13,19 +13,17 @@ public class Skill : MonoBehaviour
     [SerializeField] private UnityEvent OnSkillEndEvent;
 
     protected virtual void Awake() { }
-    protected virtual void Start()
-    {
-        this.enabled = false;
-    }
-    private enum SkillState
+    protected virtual void Start() { }
+    protected enum SkillState
     {
         Ready,
         Delay,
         Activating,
+        Waiting,
         CoolDown
     }
 
-    private SkillState skillState = SkillState.Ready;
+    protected SkillState skillState = SkillState.Ready;
     private float skillTimer;
 
     private void Update()
@@ -35,19 +33,17 @@ public class Skill : MonoBehaviour
             case SkillState.Delay:
                 if (skillTimer >= skillStat.SkillDelay)
                 {
-                    OnSkillTrigger();
                     OnSkillTriggerEvent?.Invoke();
                     skillState = SkillState.Activating;
                     skillTimer = 0;
+                    OnSkillTrigger();
                 }
                 break;
             case SkillState.Activating:
                 if (skillTimer >= skillStat.SkillDuration)
                 {
-                    OnSkillEnd();
                     OnSkillEndEvent?.Invoke();
-                    skillState = SkillState.CoolDown;
-                    skillTimer = 0;
+                    OnSkillEnd();
                 }
                 break;
             case SkillState.CoolDown:
@@ -67,10 +63,11 @@ public class Skill : MonoBehaviour
     public virtual void Public_ActivateSkill(bool isCanUseSkill) 
     {
         if (!isCanUseSkill || (skillState != SkillState.Ready)) return;
-        
-        OnSkillDelay();
+
         OnSkillDelayEvent?.Invoke(); 
         skillState = SkillState.Delay;
+        skillTimer = 0;
+        OnSkillDelay();
         this.enabled = true;
     }
     public virtual void Public_DeactivateSkill()
@@ -79,13 +76,27 @@ public class Skill : MonoBehaviour
 
         OnSkillCancelEvent?.Invoke();
         OnSkillEnd();
-        skillTimer = 0;
-        skillState = SkillState.CoolDown;
     }
 
 
     /* Phases handlers */
-    protected virtual void OnSkillDelay() { }
-    protected virtual void OnSkillTrigger() { }
-    protected virtual void OnSkillEnd() { }
+    protected virtual void OnSkillDelay() 
+    {
+        pStat.Public_SetCanMove(false);
+        pStat.Public_SetCanUseSkill(false);
+        pStat.Public_StopMoveOnGround();
+    }
+    protected virtual void OnSkillTrigger() 
+    {
+        pStat.Public_SetCanMove(false);
+        pStat.Public_SetCanUseSkill(false);
+        pStat.Public_StopMoveOnGround();
+    }
+    protected virtual void OnSkillEnd() 
+    {
+        pStat.Public_SetCanMove(true);
+        pStat.Public_SetCanUseSkill(true);
+        skillState = SkillState.CoolDown;
+        skillTimer = 0;
+    }
 }

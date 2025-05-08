@@ -28,13 +28,6 @@ public class Skill_MeleeAttack : Skill
     }
 
 
-    public override void Public_DeactivateSkill()
-    {
-        base.Public_DeactivateSkill();
-        col.enabled = false;
-    }
-
-
     protected override void OnSkillTrigger()
     { 
         col.enabled = true;
