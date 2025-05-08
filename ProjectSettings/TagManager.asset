@@ -14,7 +14,7 @@ TagManager:
   - Player
   - Object
   - Wall
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1655676353
+    locked: 0
+  - name: Enemy
+    uniqueID: 3184938959
     locked: 0
   - name: Object
     uniqueID: 1014291677

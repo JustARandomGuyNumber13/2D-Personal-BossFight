@@ -4,26 +4,19 @@ using UnityEngine.InputSystem;
 
 public class P_Controller : MonoBehaviour
 {
-    [SerializeField] private SO_CharStat charStat;
-    
+    [SerializeField] private P_Stat stat;
     [SerializeField] private float groundCheckDistance = 0.6f;
     
-    private int moveInput;
-
-    private readonly int moveAnimHash = Animator.StringToHash("moveInput");
-    
-    private bool isOnGround;
-    private bool isCanMove = true;
-    private bool isCanUseSkill = true;
-
     private Rigidbody2D rb;
     private Animator anim; // Only for horizontal movement
+    private readonly int moveAnimHash = Animator.StringToHash("moveInput");
+    private int moveInput;
 
-    [SerializeField] private UnityEvent<bool> OnJumpEvent; // isOnGround
-    [SerializeField] private UnityEvent<bool> OnLandEvent; // isOnGround
-    [SerializeField] private UnityEvent<bool> OnBasicAttackEvent; // isCanUseSkill
-    [SerializeField] private UnityEvent<bool> OnSkillOneEvent; // isCanUseSkill
-    [SerializeField] private UnityEvent<bool> OnSkillTwoEvent; // isCanUseSkill
+    [SerializeField] private UnityEvent<bool> OnJumpEvent; // stat.OnGround
+    [SerializeField] private UnityEvent<bool> OnLandEvent; // stat.OnGround
+    [SerializeField] private UnityEvent<bool> OnBasicAttackEvent; // stat.CanUseSkill
+    [SerializeField] private UnityEvent<bool> OnSkillOneEvent; // stat.CanUseSkill
+    [SerializeField] private UnityEvent<bool> OnSkillTwoEvent; // stat.CanUseSkill
 
 
     /* Monobehavior methods */
@@ -46,9 +39,9 @@ public class P_Controller : MonoBehaviour
     /* Action handlers */
     private void Action_Move()
     {
-        if (isCanMove)
+        if (stat.CanMove)
         {
-            rb.linearVelocityX = moveInput * charStat.MoveSpeed;
+            rb.linearVelocityX = moveInput * stat.MoveSpeed;
 
             if (moveInput != 0 && moveInput != transform.localScale.x)
                 transform.localScale = new Vector3(moveInput, 1, 1);
@@ -59,12 +52,12 @@ public class P_Controller : MonoBehaviour
     }
     private void Action_Jump()
     {
-        if (!isCanMove || !isCanUseSkill || !isOnGround) return;
+        if (!stat.CanMove || !stat.CanUseSkill || !stat.OnGround) return;
 
         rb.linearVelocityY = 0;
-        rb.AddForce(Vector2.up * charStat.JumpForce, ForceMode2D.Impulse);
-        isOnGround = false;
-        OnJumpEvent?.Invoke(isOnGround);
+        rb.AddForce(Vector2.up * stat.JumpForce, ForceMode2D.Impulse);
+        stat.OnGround = false;
+        OnJumpEvent?.Invoke(stat.OnGround);
     }
 
 
@@ -75,8 +68,8 @@ public class P_Controller : MonoBehaviour
 
         if (hit.collider != null)
         {
-            isOnGround = true;
-            OnLandEvent?.Invoke(isOnGround);
+            stat.OnGround = true;
+            OnLandEvent?.Invoke(stat.OnGround);
         }
     }
 
@@ -93,20 +86,14 @@ public class P_Controller : MonoBehaviour
     }
     private void OnBasicAttack()
     {
-        OnBasicAttackEvent?.Invoke(isCanUseSkill);
+        OnBasicAttackEvent?.Invoke(stat.CanUseSkill);
     }
     private void OnSkillOne()
     {
-        OnSkillOneEvent?.Invoke(isCanUseSkill);
+        OnSkillOneEvent?.Invoke(stat.CanUseSkill);
     }
     private void OnSkillTwo()
     {
-        OnSkillTwoEvent?.Invoke(isCanUseSkill);
+        OnSkillTwoEvent?.Invoke(stat.CanUseSkill);
     }
-
-    /* Public methods */
-    public void Public_StopMove()
-    { rb.linearVelocityX = 0; }
-    public void Public_SetIsCanMove(bool value) { isCanMove = value; }
-    public void Public_SetIsCanUseSkill(bool value) { isCanUseSkill = value; }
 }

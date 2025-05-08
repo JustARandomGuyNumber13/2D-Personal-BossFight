@@ -4,12 +4,18 @@ using UnityEngine.Events;
 
 public class Skill : MonoBehaviour
 {
-    [SerializeField] private SO_SkillStat skillStat;
+    [SerializeField] protected SO_SkillStat skillStat;
 
     [SerializeField] private UnityEvent OnSkillDelayEvent;
     [SerializeField] private UnityEvent OnSkillTriggerEvent;
+    [SerializeField] private UnityEvent OnSkillCancelEvent;
     [SerializeField] private UnityEvent OnSkillEndEvent;
 
+    protected virtual void Awake() { }
+    protected virtual void Start()
+    {
+        this.enabled = false;
+    }
     private enum SkillState
     {
         Ready,
@@ -44,7 +50,7 @@ public class Skill : MonoBehaviour
                 }
                 break;
             case SkillState.CoolDown:
-                if (skillTimer >= skillStat.SkillDuration)
+                if (skillTimer >= skillStat.SkillCD)
                 {
                     skillState = SkillState.Ready;
                     skillTimer = 0;
@@ -57,7 +63,7 @@ public class Skill : MonoBehaviour
 
 
     /* Public handlers */
-    public void Public_ActivateSkill(bool isCanUseSkill) 
+    public virtual void Public_ActivateSkill(bool isCanUseSkill) 
     {
         if (!isCanUseSkill || (skillState != SkillState.Ready)) return;
         
@@ -66,10 +72,11 @@ public class Skill : MonoBehaviour
         skillState = SkillState.Delay;
         this.enabled = true;
     }
-    public void Public_DeactivateSkill()
+    public virtual void Public_DeactivateSkill()
     {
-        if (skillState == SkillState.CoolDown) return;
+        if (skillState == SkillState.CoolDown || !this.enabled) return;
 
+        OnSkillCancelEvent?.Invoke();
         OnSkillEnd();
         skillTimer = 0;
         skillState = SkillState.CoolDown;
