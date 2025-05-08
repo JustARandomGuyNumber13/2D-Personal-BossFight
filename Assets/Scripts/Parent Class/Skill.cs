@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 public class Skill : MonoBehaviour
 {
+    [SerializeField] protected P_Stat pStat;
     [SerializeField] protected SO_SkillStat skillStat;
 
     [SerializeField] private UnityEvent OnSkillDelayEvent;

@@ -3,7 +3,6 @@ using UnityEngine.Events;
 
 public class Skill_BloodThirst : Skill
 {
-    [SerializeField] private P_Stat pStat;
     [SerializeField] private UnityEvent<float> LifeStealEvent; // dmgAmount
 
     public void Public_LifeSteal(float dmgAmount)
