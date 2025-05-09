@@ -8,7 +8,6 @@ public class Skill_BloodThirst : Skill
 
     protected override void OnSkillTrigger()
     {
-        pStat.Public_SetCanMove(true);
-        pStat.Public_SetCanUseSkill(true);
+
     }
 }

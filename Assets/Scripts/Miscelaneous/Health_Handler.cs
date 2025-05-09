@@ -15,6 +15,7 @@ public class Health_Handler : MonoBehaviour
     {
         health = charStat.MaxHealth;
         pStat = GetComponent<P_Stat>();
+        health /= 2;
     }
 
     public void Public_DecreaseHealth(float amount)
@@ -43,11 +44,12 @@ public class Health_Handler : MonoBehaviour
     {
         if (!pStat.LifeSteal) return;
 
-        health += dmgAmount / lifeStealPercentage;
+        health += dmgAmount * lifeStealPercentage / 100;
         if (health > charStat.MaxHealth) health = charStat.MaxHealth;
     }
     public void Public_SetLifeStealPercentage(float amount)
-    { 
+    {
+        if (!pStat.LifeSteal) return;
         lifeStealPercentage = amount;
     }
 }

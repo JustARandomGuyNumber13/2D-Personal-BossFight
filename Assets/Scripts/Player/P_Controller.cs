@@ -102,17 +102,4 @@ public class P_Controller : MonoBehaviour
     {
         OnSkillTwoEvent?.Invoke(pStat.CanUseSkill);
     }
-
-
-    /* Public controllers */
-    public void Public_StopMoveOnGround()
-    { if (pStat.OnGround) rb.linearVelocityX = 0; }
-    public void Public_StopMove()
-    { rb.linearVelocityX = 0; }
-    public void Public_AddForce(Vector2 force, ForceMode2D forceMode)
-    { rb.AddForce(force, forceMode); }
-    public void Public_SetGravity(float value)
-    { rb.gravityScale = value; }
-    public void Public_ResetGravity()
-    { rb.gravityScale = pStat.Gravity; }
 }
