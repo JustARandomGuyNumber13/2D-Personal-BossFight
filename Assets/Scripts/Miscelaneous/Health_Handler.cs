@@ -6,6 +6,7 @@ public class Health_Handler : MonoBehaviour
     [SerializeField] private SO_CharStat charStat;
 
     private float health;
+    private P_Stat pStat;
 
     [SerializeField] private UnityEvent<float> OnHealthDecreaseEvent; // health
     [SerializeField] private UnityEvent<float> OnHealthIncreaseEvent; // health
@@ -13,14 +14,15 @@ public class Health_Handler : MonoBehaviour
     private void Start()
     {
         health = charStat.MaxHealth;
+        pStat = GetComponent<P_Stat>();
     }
 
     public void Public_DecreaseHealth(float amount)
     {
-        float dmgAmount = charStat.DefenseValue - amount;
+        float dmgAmount = amount - charStat.DefenseValue;
         if (dmgAmount < 0) dmgAmount = 0;
 
-        health -= amount;    
+        health -= dmgAmount;    
         OnHealthDecreaseEvent?.Invoke(health);
     }
     public void Public_DecreaseHealthIgnoreDefense(float amount)
@@ -35,5 +37,17 @@ public class Health_Handler : MonoBehaviour
         OnHealthIncreaseEvent?.Invoke(health);
     }
 
-    
+    /* Life steal section */
+    float lifeStealPercentage;
+    public void Public_LifeSteal(float dmgAmount)
+    {
+        if (!pStat.LifeSteal) return;
+
+        health += dmgAmount / lifeStealPercentage;
+        if (health > charStat.MaxHealth) health = charStat.MaxHealth;
+    }
+    public void Public_SetLifeStealPercentage(float amount)
+    { 
+        lifeStealPercentage = amount;
+    }
 }

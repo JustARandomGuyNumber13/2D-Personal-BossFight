@@ -12,6 +12,7 @@ public class P_Stat : MonoBehaviour
 
     public float MoveSpeed { get; private set; }
     public float JumpForce { get; private set; }
+    public float Gravity { get; private set; }
 
     private Rigidbody2D rb;
 
@@ -23,14 +24,10 @@ public class P_Stat : MonoBehaviour
     {
         MoveSpeed = charStat.MoveSpeed;
         JumpForce = charStat.JumpForce;
+        Gravity = GetComponent<Rigidbody2D>().gravityScale;
     }
 
     public void Public_SetCanMove(bool value) { CanMove = value; }
     public void Public_SetCanUseSkill(bool value) { CanUseSkill = value; }
     public void Public_SetLifeSteal(bool value) { LifeSteal = value; }
-
-    public void Public_StopMoveOnGround()
-    { if (OnGround) rb.linearVelocityX = 0; }
-    public void Public_StopMove()
-    { rb.linearVelocityX = 0; }
 }

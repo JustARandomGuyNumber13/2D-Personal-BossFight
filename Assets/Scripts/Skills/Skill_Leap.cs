@@ -10,20 +10,24 @@ public class Skill_Leap : Skill
     Rigbidbody 2d: Yes
     Layer: Default
      */
-
-    [SerializeField] private Rigidbody2D pRb;
+    [Header("Skill Exclusive:")]
+    [SerializeField] private P_Controller pControl;
     [SerializeField] private Vector2 launchForce;
     [SerializeField] private Vector2 dmgRectangleSize;
     [SerializeField] private Vector2 dmgRectangleOffset;
+    [SerializeField] private float gravityDuringLaunch;
     [SerializeField] private float dmgAmount;
     [SerializeField] private string targetLayerName;
     [SerializeField] private UnityEvent<Collider2D, float> OnTargetsContactEvent;
 
     private Collider2D col;
+    private Rigidbody2D rb;
 
     protected override void Awake()
     {
+        base.Awake();
         col = GetComponent<Collider2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
     //private void OnDrawGizmosSelected()
     //{
@@ -36,12 +40,13 @@ public class Skill_Leap : Skill
         base.OnSkillTrigger();
         pStat.OnGround = false;
         skillState = SkillState.Waiting;
-        col.enabled = true;
-        pRb.AddForce(launchForce * pRb.transform.localScale, ForceMode2D.Impulse);
+        pControl.Public_SetGravity(gravityDuringLaunch);
+        pControl.Public_AddForce(launchForce * transform.lossyScale, ForceMode2D.Impulse);
+        Invoke("EnableCol", 0.1f);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == Global.GroundLayerIndex && pRb.linearVelocityY <= 0)
+        if (collision.gameObject.layer == Global.GroundLayerIndex && rb.linearVelocityY == 0)
         {
             RaycastHit2D[] hitList = 
                 Physics2D.BoxCastAll(transform.position + (Vector3)dmgRectangleOffset, dmgRectangleSize, 0, Vector2.zero, LayerMask.GetMask(targetLayerName));
@@ -58,9 +63,16 @@ public class Skill_Leap : Skill
                     OnTargetsContactEvent?.Invoke(hit.collider, dmgAmount);
                 }
             }
-
+            
             OnSkillEnd();
+            pControl.Public_ResetGravity();
             col.enabled = false;
         }
+    }
+
+    private void EnableCol()
+    { 
+        if(skillState == SkillState.Waiting)
+            col.enabled = true;
     }
 }

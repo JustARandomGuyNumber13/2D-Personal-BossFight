@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class P_Controller : MonoBehaviour
 {
-    [SerializeField] private P_Stat stat;
+    [SerializeField] private P_Stat pStat;
     [SerializeField] private Vector3 groundCheckBoxSize;
     [SerializeField] private Vector3 groundCheckBoxOffset;
     
@@ -13,11 +13,11 @@ public class P_Controller : MonoBehaviour
     private readonly int moveAnimHash = Animator.StringToHash("moveInput");
     private int moveInput;
 
-    [SerializeField] private UnityEvent<bool> OnJumpEvent; // stat.OnGround
-    [SerializeField] private UnityEvent<bool> OnLandEvent; // stat.OnGround
-    [SerializeField] private UnityEvent<bool> OnBasicAttackEvent; // stat.CanUseSkill
-    [SerializeField] private UnityEvent<bool> OnSkillOneEvent; // stat.CanUseSkill
-    [SerializeField] private UnityEvent<bool> OnSkillTwoEvent; // stat.CanUseSkill
+    [SerializeField] private UnityEvent<bool> OnJumpEvent; // pStat.OnGround
+    [SerializeField] private UnityEvent<bool> OnLandEvent; // pStat.OnGround
+    [SerializeField] private UnityEvent<bool> OnBasicAttackEvent; // pStat.CanUseSkill
+    [SerializeField] private UnityEvent<bool> OnSkillOneEvent; // pStat.CanUseSkill
+    [SerializeField] private UnityEvent<bool> OnSkillTwoEvent; // pStat.CanUseSkill
 
 
     /* Monobehavior methods */
@@ -45,9 +45,9 @@ public class P_Controller : MonoBehaviour
     /* Action handlers */
     private void Action_Move()
     {
-        if (stat.CanMove)
+        if (pStat.CanMove)
         {
-            rb.linearVelocityX = moveInput * stat.MoveSpeed;
+            rb.linearVelocityX = moveInput * pStat.MoveSpeed;
 
             if (moveInput != 0 && moveInput != transform.localScale.x)
                 transform.localScale = new Vector3(moveInput, 1, 1);
@@ -58,12 +58,12 @@ public class P_Controller : MonoBehaviour
     }
     private void Action_Jump()
     {
-        if (!stat.CanMove || !stat.CanUseSkill || !stat.OnGround) return;
+        if (!pStat.CanMove || !pStat.CanUseSkill || !pStat.OnGround) return;
 
         rb.linearVelocityY = 0;
-        rb.AddForce(Vector2.up * stat.JumpForce, ForceMode2D.Impulse);
-        stat.OnGround = false;
-        OnJumpEvent?.Invoke(stat.OnGround);
+        rb.AddForce(Vector2.up * pStat.JumpForce, ForceMode2D.Impulse);
+        pStat.OnGround = false;
+        OnJumpEvent?.Invoke(pStat.OnGround);
     }
 
 
@@ -74,8 +74,8 @@ public class P_Controller : MonoBehaviour
 
         if (hit.collider != null)
         {
-            stat.OnGround = true;
-            OnLandEvent?.Invoke(stat.OnGround);
+            pStat.OnGround = true;
+            OnLandEvent?.Invoke(pStat.OnGround);
         }
     }
 
@@ -92,14 +92,27 @@ public class P_Controller : MonoBehaviour
     }
     private void OnBasicAttack()
     {
-        OnBasicAttackEvent?.Invoke(stat.CanUseSkill);
+        OnBasicAttackEvent?.Invoke(pStat.CanUseSkill);
     }
     private void OnSkillOne()
     {
-        OnSkillOneEvent?.Invoke(stat.CanUseSkill);
+        OnSkillOneEvent?.Invoke(pStat.CanUseSkill);
     }
     private void OnSkillTwo()
     {
-        OnSkillTwoEvent?.Invoke(stat.CanUseSkill);
+        OnSkillTwoEvent?.Invoke(pStat.CanUseSkill);
     }
+
+
+    /* Public controllers */
+    public void Public_StopMoveOnGround()
+    { if (pStat.OnGround) rb.linearVelocityX = 0; }
+    public void Public_StopMove()
+    { rb.linearVelocityX = 0; }
+    public void Public_AddForce(Vector2 force, ForceMode2D forceMode)
+    { rb.AddForce(force, forceMode); }
+    public void Public_SetGravity(float value)
+    { rb.gravityScale = value; }
+    public void Public_ResetGravity()
+    { rb.gravityScale = pStat.Gravity; }
 }

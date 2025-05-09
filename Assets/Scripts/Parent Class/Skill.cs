@@ -4,12 +4,12 @@ using UnityEngine.Events;
 
 public class Skill : MonoBehaviour
 {
+    [Header("Parent components:")]
     [SerializeField] protected P_Stat pStat;
     [SerializeField] protected SO_SkillStat skillStat;
 
     [SerializeField] private UnityEvent OnSkillDelayEvent;
     [SerializeField] private UnityEvent OnSkillTriggerEvent;
-    [SerializeField] private UnityEvent OnSkillCancelEvent;
     [SerializeField] private UnityEvent OnSkillEndEvent;
 
     protected virtual void Awake() { }
@@ -33,16 +33,12 @@ public class Skill : MonoBehaviour
             case SkillState.Delay:
                 if (skillTimer >= skillStat.SkillDelay)
                 {
-                    OnSkillTriggerEvent?.Invoke();
-                    skillState = SkillState.Activating;
-                    skillTimer = 0;
                     OnSkillTrigger();
                 }
                 break;
             case SkillState.Activating:
                 if (skillTimer >= skillStat.SkillDuration)
                 {
-                    OnSkillEndEvent?.Invoke();
                     OnSkillEnd();
                 }
                 break;
@@ -64,9 +60,6 @@ public class Skill : MonoBehaviour
     {
         if (!isCanUseSkill || (skillState != SkillState.Ready)) return;
 
-        OnSkillDelayEvent?.Invoke(); 
-        skillState = SkillState.Delay;
-        skillTimer = 0;
         OnSkillDelay();
         this.enabled = true;
     }
@@ -74,7 +67,7 @@ public class Skill : MonoBehaviour
     {
         if (skillState == SkillState.CoolDown || !this.enabled) return;
 
-        OnSkillCancelEvent?.Invoke();
+        OnSkillEndEvent?.Invoke();
         OnSkillEnd();
     }
 
@@ -82,20 +75,19 @@ public class Skill : MonoBehaviour
     /* Phases handlers */
     protected virtual void OnSkillDelay() 
     {
-        pStat.Public_SetCanMove(false);
-        pStat.Public_SetCanUseSkill(false);
-        pStat.Public_StopMoveOnGround();
+        OnSkillDelayEvent?.Invoke();
+        skillState = SkillState.Delay;
+        skillTimer = 0;
     }
     protected virtual void OnSkillTrigger() 
     {
-        pStat.Public_SetCanMove(false);
-        pStat.Public_SetCanUseSkill(false);
-        pStat.Public_StopMoveOnGround();
+        skillState = SkillState.Activating;
+        OnSkillTriggerEvent?.Invoke();
+        skillTimer = 0;
     }
     protected virtual void OnSkillEnd() 
     {
-        pStat.Public_SetCanMove(true);
-        pStat.Public_SetCanUseSkill(true);
+        OnSkillEndEvent?.Invoke();
         skillState = SkillState.CoolDown;
         skillTimer = 0;
     }

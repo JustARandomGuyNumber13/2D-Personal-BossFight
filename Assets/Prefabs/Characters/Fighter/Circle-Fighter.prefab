@@ -172,17 +172,75 @@ MonoBehaviour:
       m_Calls: []
   OnSkillTriggerEvent:
     m_PersistentCalls:
-      m_Calls: []
-  OnSkillCancelEvent:
-    m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8006996509933729976}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Public_SetCanMove
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8006996509933729976}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Public_SetCanUseSkill
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3599129767982572315}
+        m_TargetAssemblyTypeName: P_Controller, Assembly-CSharp
+        m_MethodName: Public_StopMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnSkillEndEvent:
     m_PersistentCalls:
-      m_Calls: []
-  pRb: {fileID: 241200981342066881}
-  launchForce: {x: 5, y: 30}
+      m_Calls:
+      - m_Target: {fileID: 8006996509933729976}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Public_SetCanMove
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 8006996509933729976}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Public_SetCanUseSkill
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  pControl: {fileID: 3599129767982572315}
+  launchForce: {x: 7.5, y: 50}
   dmgRectangleSize: {x: 4, y: 0.5}
   dmgRectangleOffset: {x: 0, y: -0.25}
+  gravityDuringLaunch: 15
   dmgAmount: 15
   targetLayerName: Enemy
   OnTargetsContactEvent:
@@ -317,8 +375,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+      - m_Target: {fileID: 3599129767982572315}
+        m_TargetAssemblyTypeName: P_Controller, Assembly-CSharp
         m_MethodName: Public_StopMoveOnGround
         m_Mode: 1
         m_Arguments:
@@ -331,10 +389,31 @@ MonoBehaviour:
         m_CallState: 2
   OnSkillTriggerEvent:
     m_PersistentCalls:
-      m_Calls: []
-  OnSkillCancelEvent:
-    m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8006996509933729976}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Public_SetCanMove
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 8006996509933729976}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Public_SetCanUseSkill
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   OnSkillEndEvent:
     m_PersistentCalls:
       m_Calls:
@@ -350,7 +429,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  healingPercentage: 20
   pHealth: {fileID: 3729621482572387713}
 --- !u!1 &7290255461224048258
 GameObject:
@@ -578,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe3fc96e12d2584ebbbea4d569eeb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stat: {fileID: 8006996509933729976}
+  pStat: {fileID: 8006996509933729976}
   groundCheckBoxSize: {x: 0.7, y: 0.1, z: 0}
   groundCheckBoxOffset: {x: 0, y: -0.55, z: 0}
   OnJumpEvent:
@@ -912,7 +990,43 @@ MonoBehaviour:
   skillStat: {fileID: 11400000, guid: 71d3428f20fee91459c8e0129b622961, type: 2}
   OnSkillDelayEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8006996509933729976}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Public_SetCanMove
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8006996509933729976}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Public_SetCanUseSkill
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3599129767982572315}
+        m_TargetAssemblyTypeName: P_Controller, Assembly-CSharp
+        m_MethodName: Public_StopMoveOnGround
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnSkillTriggerEvent:
     m_PersistentCalls:
       m_Calls:
@@ -928,18 +1042,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnSkillCancelEvent:
-    m_PersistentCalls:
-      m_Calls: []
   OnSkillEndEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8006996509933729976}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Public_SetCanMove
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 8006996509933729976}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Public_SetCanUseSkill
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   dmgAmount: 10
   OnHitEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4428242402839805568}
-        m_TargetAssemblyTypeName: Skill_BloodThirst, Assembly-CSharp
+      - m_Target: {fileID: 3729621482572387713}
+        m_TargetAssemblyTypeName: Health_Handler, Assembly-CSharp
+        m_MethodName: Public_SetLifeStealPercentage
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 20
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3729621482572387713}
+        m_TargetAssemblyTypeName: Health_Handler, Assembly-CSharp
         m_MethodName: Public_LifeSteal
         m_Mode: 0
         m_Arguments:

@@ -11,13 +11,13 @@ TagManager:
   - Ground
   - Water
   - UI
-  - Player
-  - Object
   - Wall
+  - Object
+  - Player
   - Enemy
-  - 
-  - 
-  - 
+  - DmgEnemy
+  - DmgPlayer
+  - DmgBoth
   - 
   - 
   - 

@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 public class Skill_MeleeAttack : Skill
 {
+    [Header("Skill Exclusive:")]
     [SerializeField] private float dmgAmount;
     private Collider2D col;
 
@@ -10,6 +11,7 @@ public class Skill_MeleeAttack : Skill
 
     protected override void Awake()
     {
+        base.Awake();
         col = GetComponent<Collider2D>();
     }
     protected override void Start()
@@ -30,6 +32,7 @@ public class Skill_MeleeAttack : Skill
 
     protected override void OnSkillTrigger()
     { 
+        base.OnSkillTrigger();
         col.enabled = true;
     }
     protected override void OnSkillEnd()
