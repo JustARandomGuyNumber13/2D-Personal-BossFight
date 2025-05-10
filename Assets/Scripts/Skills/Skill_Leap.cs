@@ -14,14 +14,13 @@ public class Skill_Leap : Skill
     [SerializeField] private Color gizmosColor = Color.red;
 
     [SerializeField] private UnityEvent<float> OnTargetsContactEvent;
-    
+ 
 
-    private void OnDrawGizmosSelected()
+    public override void Public_ActivateSkill(bool isCanUseSkill)
     {
-        Gizmos.color = gizmosColor; ;
-        Gizmos.DrawWireCube(transform.position + (Vector3)dmgRectangleOffset, dmgRectangleSize);
+        if (!pStat.OnGround) return;
+        base.Public_ActivateSkill(isCanUseSkill);
     }
-
     protected override void OnSkillTrigger()
     {
         base.OnSkillTrigger();
@@ -52,5 +51,15 @@ public class Skill_Leap : Skill
 
         pStat.Public_ResetGravity();
         OnSkillEnd();
+    }
+
+
+    Vector3 gizPos;
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = gizmosColor;
+        gizPos = (Vector3)dmgRectangleOffset;
+        gizPos.x *= transform.lossyScale.x;
+        Gizmos.DrawWireCube(transform.position + gizPos, dmgRectangleSize);
     }
 }

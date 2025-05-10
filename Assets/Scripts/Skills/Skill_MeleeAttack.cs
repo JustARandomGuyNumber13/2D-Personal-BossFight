@@ -12,18 +12,15 @@ public class Skill_MeleeAttack : Skill
 
     [SerializeField] private UnityEvent<float> OnHitEvent; // dmgAmount
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = gizmosColor;
-        Gizmos.DrawWireCube(transform.position + atkBoxOffset, atkBoxSize);
-    }
-
     override protected void OnSkillTrigger()
     {
         base.OnSkillTrigger();
+        Vector3 hitPos = transform.position;
+        hitPos.x += transform.lossyScale.x * atkBoxOffset.x;
+        hitPos.y += atkBoxOffset.y;
 
         RaycastHit2D[] hitList = 
-            Physics2D.BoxCastAll(transform.position + atkBoxOffset, atkBoxSize, 0, Vector2.zero, 0, LayerMask.GetMask(targetLayerName));
+            Physics2D.BoxCastAll(hitPos, atkBoxSize, 0, Vector3.zero, 0, LayerMask.GetMask(targetLayerName));
 
         if (hitList.Length == 0) return;
 
@@ -40,4 +37,16 @@ public class Skill_MeleeAttack : Skill
         }
     }
 
+
+    Vector3 gizPos;
+    Vector3 gizBox;
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = gizmosColor;
+        gizPos = atkBoxOffset;
+        gizPos.x *= transform.lossyScale.x;
+        gizBox = atkBoxSize;
+        gizBox.x *= transform.lossyScale.x;
+        Gizmos.DrawWireCube(transform.position + gizPos, gizBox);
+    }
 }

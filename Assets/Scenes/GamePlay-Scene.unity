@@ -1646,10 +1646,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7332574503290608162, guid: d5b02e6b5dfd4f74bb859ef1543133d4, type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1706,18 +1702,6 @@ PrefabInstance:
     - target: {fileID: 7290255461224048258, guid: 87fee4640a0f288408e53872ddc9497c, type: 3}
       propertyPath: m_Name
       value: Circle-Fighter
-      objectReference: {fileID: 0}
-    - target: {fileID: 8706624734414241215, guid: 87fee4640a0f288408e53872ddc9497c, type: 3}
-      propertyPath: gizmosColor.b
-      value: 0.29411766
-      objectReference: {fileID: 0}
-    - target: {fileID: 8706624734414241215, guid: 87fee4640a0f288408e53872ddc9497c, type: 3}
-      propertyPath: gizmosColor.g
-      value: 0.29803923
-      objectReference: {fileID: 0}
-    - target: {fileID: 8706624734414241215, guid: 87fee4640a0f288408e53872ddc9497c, type: 3}
-      propertyPath: gizmosColor.r
-      value: 0.9450981
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

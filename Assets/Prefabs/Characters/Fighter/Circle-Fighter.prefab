@@ -229,6 +229,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8006996509933729976}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Print
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Player Skill Leap Hit Enemy!
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2640486404029672466
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,7 +534,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1655676353
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.9433962, g: 0.29814878, b: 0.29814878, a: 1}
@@ -713,6 +725,18 @@ MonoBehaviour:
   OnLandEvent:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 4095836088408486238}
+        m_TargetAssemblyTypeName: P_Animator, Assembly-CSharp
+        m_MethodName: Public_Land
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1324753494031218047}
         m_TargetAssemblyTypeName: Skill_Leap, Assembly-CSharp
         m_MethodName: Public_OnLand
@@ -753,8 +777,32 @@ MonoBehaviour:
   OnHealthDecreaseEvent:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 4748072772992112629}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: hurt
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 8706624734414241215}
         m_TargetAssemblyTypeName: Skill_MeleeAttack, Assembly-CSharp
+        m_MethodName: Public_DeactivateSkill
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1324753494031218047}
+        m_TargetAssemblyTypeName: Skill, Assembly-CSharp
         m_MethodName: Public_DeactivateSkill
         m_Mode: 1
         m_Arguments:
@@ -915,7 +963,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1655676353
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1003,7 +1051,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1655676353
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0.41037738, b: 0.41037738, a: 1}
@@ -1127,7 +1175,7 @@ MonoBehaviour:
   dmgAmount: 10
   atkBoxSize: {x: 2, y: 0.5, z: 0}
   atkBoxOffset: {x: 0.5, y: 0, z: 0}
-  gizmosColor: {r: 1, g: 0, b: 0, a: 1}
+  gizmosColor: {r: 0.9450981, g: 0.29803923, b: 0.29411766, a: 1}
   OnHitEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1153,5 +1201,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8006996509933729976}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Print
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Player Skill Basic Attack hit Enemy!
           m_BoolArgument: 0
         m_CallState: 2

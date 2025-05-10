@@ -98,7 +98,7 @@ public class E_Controller : MonoBehaviour
     {
         if (transform.position.x < pTransform.position.x)
             transform.localScale = Vector3.one;
-        else
+        else if (transform.position.x > pTransform.position.x)
             transform.localScale = new Vector3(-1, 1, 1);
     }
 }
