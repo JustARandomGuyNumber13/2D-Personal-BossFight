@@ -4,40 +4,40 @@ using UnityEngine.Events;
 public class Skill_MeleeAttack : Skill
 {
     [Header("Skill Exclusive:")]
+    [SerializeField] private string targetLayerName;
     [SerializeField] private float dmgAmount;
-    private Collider2D col;
+    [SerializeField] private Vector3 atkBoxSize;
+    [SerializeField] private Vector3 atkBoxOffset;
+    [SerializeField] private Color gizmosColor = Color.red;
 
     [SerializeField] private UnityEvent<float> OnHitEvent; // dmgAmount
 
-    protected override void Awake()
+    private void OnDrawGizmosSelected()
     {
-        base.Awake();
-        col = GetComponent<Collider2D>();
+        Gizmos.color = gizmosColor;
+        Gizmos.DrawWireCube(transform.position + atkBoxOffset, atkBoxSize);
     }
-    protected override void Start()
+
+    override protected void OnSkillTrigger()
     {
-        base.Start();
-        col.enabled = false;
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == Global.EnemyLayerIndex)
+        base.OnSkillTrigger();
+
+        RaycastHit2D[] hitList = 
+            Physics2D.BoxCastAll(transform.position + atkBoxOffset, atkBoxSize, 0, Vector2.zero, 0, LayerMask.GetMask(targetLayerName));
+
+        if (hitList.Length == 0) return;
+
+        foreach (RaycastHit2D hit in hitList)
         {
-            collision.GetComponent<Health_Handler>().Public_DecreaseHealth(dmgAmount);
-            col.enabled = false;
-            OnHitEvent?.Invoke(dmgAmount);
+            Health_Handler targetHealth;
+            hit.collider.TryGetComponent<Health_Handler>(out targetHealth);
+
+            if (targetHealth != null)
+            {
+                targetHealth.Public_DecreaseHealth(dmgAmount);
+                OnHitEvent?.Invoke(dmgAmount);
+            }
         }
     }
 
-
-    protected override void OnSkillTrigger()
-    { 
-        base.OnSkillTrigger();
-        col.enabled = true;
-    }
-    protected override void OnSkillEnd()
-    {
-        base.OnSkillEnd();
-        col.enabled = false;
-    }
 }

@@ -1,8 +1,13 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class P_Stat : MonoBehaviour
 {
     [SerializeField] private SO_CharStat charStat;
+    [SerializeField] private Vector3 groundCheckBoxSize;
+    [SerializeField] private Vector3 groundCheckBoxOffset;
+    [SerializeField] private Color groundCheckBoxColor = Color.blue;
+    [SerializeField] private UnityEvent<bool> OnLandEvent; // OnGround
 
     public bool OnGround { get; set; }
     public bool CanMove { get; private set; } = true;
@@ -26,6 +31,23 @@ public class P_Stat : MonoBehaviour
         JumpForce = charStat.JumpForce;
         gravity = rb.gravityScale;
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ((collision.gameObject.layer == Global.GroundLayerIndex))
+            Helper_GroundCheck(collision);
+    }
+
+    /* Helper methods */
+    private void Helper_GroundCheck(Collision2D collision)
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position + groundCheckBoxOffset, groundCheckBoxSize, 0, Vector2.zero, 0, Global.GroundLayer);
+
+        if (hit.collider != null)
+        {
+            OnGround = true;
+            OnLandEvent?.Invoke(OnGround);
+        }
+    }
 
     public void Public_SetCanMove(bool value) 
     { CanMove = value; }
@@ -45,4 +67,11 @@ public class P_Stat : MonoBehaviour
     { rb.gravityScale = gravity; }
     public void Print(string text)
     { Debug.Log(text,gameObject); }
+
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = groundCheckBoxColor;
+        Gizmos.DrawWireCube(transform.position + groundCheckBoxOffset, groundCheckBoxSize);
+    }
 }

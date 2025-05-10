@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50d019d3952ebe14a928124769419b32, type: 3}
-  m_Name: SO_SkillStat_P_Fighter_BasicAttack
+  m_Name: SO_SkillStat_E_Square_Leap
   m_EditorClassIdentifier: 
-  skillName: Basic Attack
+  skillName: 
   skillImage: {fileID: 0}
-  skillDelay: 0.1
+  skillDelay: 0
   skillDuration: 0
-  skillCD: 0.3
+  skillCD: 0

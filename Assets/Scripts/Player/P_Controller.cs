@@ -5,8 +5,6 @@ using UnityEngine.InputSystem;
 public class P_Controller : MonoBehaviour
 {
     [SerializeField] private P_Stat pStat;
-    [SerializeField] private Vector3 groundCheckBoxSize;
-    [SerializeField] private Vector3 groundCheckBoxOffset;
     
     private Rigidbody2D rb;
     private Animator anim; // Only for horizontal movement
@@ -14,7 +12,6 @@ public class P_Controller : MonoBehaviour
     private int moveInput;
 
     [SerializeField] private UnityEvent<bool> OnJumpEvent; // pStat.OnGround
-    [SerializeField] private UnityEvent<bool> OnLandEvent; // pStat.OnGround
     [SerializeField] private UnityEvent<bool> OnBasicAttackEvent; // pStat.CanUseSkill
     [SerializeField] private UnityEvent<bool> OnSkillOneEvent; // pStat.CanUseSkill
     [SerializeField] private UnityEvent<bool> OnSkillTwoEvent; // pStat.CanUseSkill
@@ -30,17 +27,6 @@ public class P_Controller : MonoBehaviour
     {
         Action_Move();
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if ((collision.gameObject.layer == Global.GroundLayerIndex))
-            Helper_GroundCheck(collision);
-    }
-    //private void OnDrawGizmosSelected()
-    //{
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawCube(transform.position + groundCheckBoxOffset, groundCheckBoxSize);
-    //}
-
 
     /* Action handlers */
     private void Action_Move()
@@ -64,19 +50,6 @@ public class P_Controller : MonoBehaviour
         rb.AddForce(Vector2.up * pStat.JumpForce, ForceMode2D.Impulse);
         pStat.OnGround = false;
         OnJumpEvent?.Invoke(pStat.OnGround);
-    }
-
-
-    /* Helper methods */
-    private void Helper_GroundCheck(Collision2D collision)
-    {
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position + groundCheckBoxOffset, groundCheckBoxSize, 0, Vector2.zero, 0, Global.GroundLayer);
-
-        if (hit.collider != null)
-        {
-            pStat.OnGround = true;
-            OnLandEvent?.Invoke(pStat.OnGround);
-        }
     }
 
 

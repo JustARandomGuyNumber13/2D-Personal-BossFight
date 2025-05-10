@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 7332574503290608162}
   - component: {fileID: 1873405269707694597}
   - component: {fileID: 2880891623668324064}
+  - component: {fileID: 543285384154890599}
   - component: {fileID: 6306743387823584287}
+  - component: {fileID: 4280709180006419520}
   m_Layer: 9
   m_Name: Square-Enemy
   m_TagString: Untagged
@@ -31,10 +33,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2728313347561828796}
+  - {fileID: 4306306549707852493}
+  - {fileID: 4369874092317093498}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7636331920459936635
@@ -163,7 +167,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
 --- !u!95 &2880891623668324064
 Animator:
@@ -187,6 +191,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &543285384154890599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343788807227935209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccd35711f11e5e94cb95e77e884fbadd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charStat: {fileID: 11400000, guid: 28e222ba13c8ecb4cb84688710fb2f74, type: 2}
+  groundCheckBoxSize: {x: 2, y: 0.1, z: 0}
+  groundCheckBoxOffset: {x: 0, y: -1.6, z: 0}
+  groundCheckBoxColor: {r: 0, g: 0, b: 1, a: 1}
+  OnLandEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2107714936475046665}
+        m_TargetAssemblyTypeName: Skill_Leap, Assembly-CSharp
+        m_MethodName: Public_OnLand
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6306743387823584287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +253,25 @@ MonoBehaviour:
   OnHealthIncreaseEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4280709180006419520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343788807227935209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9bab46644fdba34484919164fa05876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eStat: {fileID: 543285384154890599}
+  pTransform: {fileID: 0}
+  enemyState: 0
+  basicAttack: {fileID: 7144522392754075613}
+  skillOne: {fileID: 5012483645467125113}
+  skillTwo: {fileID: 5012483645467125113}
+  offSet: 3
 --- !u!1 &3763871043792834666
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +299,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4959034088699974687}
@@ -305,3 +359,251 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4371922257731317914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4369874092317093498}
+  - component: {fileID: 2107714936475046665}
+  - component: {fileID: 5012483645467125113}
+  m_Layer: 9
+  m_Name: E_Skill_Leap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4369874092317093498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4371922257731317914}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4959034088699974687}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2107714936475046665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4371922257731317914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9b6b54cbcd0bf24183376c6d6abbb44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pStat: {fileID: 543285384154890599}
+  skillStat: {fileID: 11400000, guid: a648c824a9a8577409b64e9f019eeaa3, type: 2}
+  OnSkillDelayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSkillTriggerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 543285384154890599}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Print
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Enemy Activate Skill Leap
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnSkillEndEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 543285384154890599}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Print
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Enemy Skill Leap Landed
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4280709180006419520}
+        m_TargetAssemblyTypeName: E_Controller, Assembly-CSharp
+        m_MethodName: Public_ResetState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Enemy Leap landed
+          m_BoolArgument: 0
+        m_CallState: 2
+  targetLayerName: Player
+  launchForce: {x: 7, y: 50}
+  dmgRectangleSize: {x: 5, y: 2}
+  dmgRectangleOffset: {x: 0, y: -0.5}
+  gravityDuringLaunch: 10
+  dmgAmount: 30
+  gizmosColor: {r: 0.9348427, g: 1, b: 0, a: 1}
+  OnTargetsContactEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 543285384154890599}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Print
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Enemy Skill Leap hit Player!
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5012483645467125113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4371922257731317914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28efcf3832978c44589bed2083ed1a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillStat: {fileID: 11400000, guid: a648c824a9a8577409b64e9f019eeaa3, type: 2}
+  skill: {fileID: 2107714936475046665}
+  skillRequireRange: 10
+  skillCD: 3
+  gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &6670358856397521016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4306306549707852493}
+  - component: {fileID: 6997580609375700747}
+  - component: {fileID: 7144522392754075613}
+  m_Layer: 9
+  m_Name: E_Skill_BasicAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4306306549707852493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670358856397521016}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4959034088699974687}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6997580609375700747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670358856397521016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f205779af7dff4438a841756cb1e2df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pStat: {fileID: 543285384154890599}
+  skillStat: {fileID: 11400000, guid: 1cd79e92b936e3d49a61a954dbe91e35, type: 2}
+  OnSkillDelayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSkillTriggerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 543285384154890599}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Print
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Enemy Basic Attack
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnSkillEndEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4280709180006419520}
+        m_TargetAssemblyTypeName: E_Controller, Assembly-CSharp
+        m_MethodName: Public_ResetState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  targetLayerName: Player
+  dmgAmount: 15
+  atkBoxSize: {x: 6, y: 2, z: 0}
+  atkBoxOffset: {x: -1.5, y: 0, z: 0}
+  gizmosColor: {r: 1, g: 0, b: 0, a: 1}
+  OnHitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 543285384154890599}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Print
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Enemy Basic Attack hit Player!
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7144522392754075613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670358856397521016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28efcf3832978c44589bed2083ed1a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillStat: {fileID: 11400000, guid: 1cd79e92b936e3d49a61a954dbe91e35, type: 2}
+  skill: {fileID: 6997580609375700747}
+  skillRequireRange: 4
+  skillCD: 2
+  gizmosColor: {r: 1, g: 1, b: 1, a: 1}

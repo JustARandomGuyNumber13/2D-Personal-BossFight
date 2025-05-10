@@ -3,36 +3,24 @@ using UnityEngine.Events;
 
 public class Skill_Leap : Skill
 {
-    /*
-    Skill set up:
-    Connect to: Skill prefab (include all below)
-    Collider2d: Trigger collider 
-    Rigbidbody 2d: Yes
-    Layer: Default
-     */
+
     [Header("Skill Exclusive:")]
+    [SerializeField] private string targetLayerName;
     [SerializeField] private Vector2 launchForce;
     [SerializeField] private Vector2 dmgRectangleSize;
     [SerializeField] private Vector2 dmgRectangleOffset;
     [SerializeField] private float gravityDuringLaunch;
     [SerializeField] private float dmgAmount;
-    [SerializeField] private string targetLayerName;
+    [SerializeField] private Color gizmosColor = Color.red;
+
     [SerializeField] private UnityEvent<float> OnTargetsContactEvent;
+    
 
-    private Collider2D col;
-    private Rigidbody2D rb;
-
-    protected override void Awake()
+    private void OnDrawGizmosSelected()
     {
-        base.Awake();
-        col = GetComponent<Collider2D>();
-        rb = GetComponent<Rigidbody2D>();
+        Gizmos.color = gizmosColor; ;
+        Gizmos.DrawWireCube(transform.position + (Vector3)dmgRectangleOffset, dmgRectangleSize);
     }
-    //private void OnDrawGizmosSelected()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawCube(transform.position + (Vector3)dmgRectangleOffset, dmgRectangleSize);
-    //}
 
     protected override void OnSkillTrigger()
     {
@@ -41,16 +29,15 @@ public class Skill_Leap : Skill
         skillState = SkillState.Waiting;
         pStat.Public_SetGravity(gravityDuringLaunch);
         pStat.Public_AddForce(launchForce * transform.lossyScale, ForceMode2D.Impulse);
-        Invoke("EnableCol", 0.1f);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Public_OnLand()
     {
-        if (collision.gameObject.layer == Global.GroundLayerIndex && rb.linearVelocityY == 0)
-        {
-            RaycastHit2D[] hitList = 
-                Physics2D.BoxCastAll(transform.position + (Vector3)dmgRectangleOffset, dmgRectangleSize, 0, Vector2.zero, 0, LayerMask.GetMask(targetLayerName));
-            if (hitList.Length == 0) return;
+        if (!this.enabled || skillState != SkillState.Waiting) return;
 
+        RaycastHit2D[] hitList = 
+            Physics2D.BoxCastAll(transform.position + (Vector3)dmgRectangleOffset, dmgRectangleSize, 0, Vector2.zero, 0, LayerMask.GetMask(targetLayerName));
+        
+        if (hitList.Length != 0)
             foreach (RaycastHit2D hit in hitList)
             {
                 Health_Handler colHealth;
@@ -62,16 +49,8 @@ public class Skill_Leap : Skill
                     OnTargetsContactEvent?.Invoke(dmgAmount);
                 }
             }
-            
-            OnSkillEnd();
-            pStat.Public_ResetGravity();
-            col.enabled = false;
-        }
-    }
 
-    private void EnableCol()
-    { 
-        if(skillState == SkillState.Waiting)
-            col.enabled = true;
+        pStat.Public_ResetGravity();
+        OnSkillEnd();
     }
 }
