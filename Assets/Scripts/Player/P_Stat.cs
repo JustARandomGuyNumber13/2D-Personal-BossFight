@@ -7,7 +7,7 @@ public class P_Stat : MonoBehaviour
     [SerializeField] private Vector3 groundCheckBoxSize;
     [SerializeField] private Vector3 groundCheckBoxOffset;
     [SerializeField] private Color groundCheckBoxColor = Color.blue;
-    [SerializeField] private UnityEvent<bool> OnLandEvent; // OnGround
+    public UnityEvent OnLandEvent; // OnGround
 
     public bool OnGround { get; set; }
     public bool CanMove { get; private set; } = true;
@@ -45,7 +45,7 @@ public class P_Stat : MonoBehaviour
         if (hit.collider != null)
         {
             OnGround = true;
-            OnLandEvent?.Invoke(OnGround);
+            OnLandEvent?.Invoke();
         }
     }
 
