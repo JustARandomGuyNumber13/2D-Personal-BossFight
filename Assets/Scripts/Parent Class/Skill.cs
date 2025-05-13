@@ -7,51 +7,47 @@ public class Skill : MonoBehaviour
     [Header("Parent components:")]
     [SerializeField] protected P_Stat pStat;
     [SerializeField] protected SO_SkillStat skillStat;
+    [SerializeField] protected SkillType skillType = SkillType.Active;
 
     [SerializeField] private UnityEvent OnSkillDelayEvent;
     [SerializeField] private UnityEvent OnSkillTriggerEvent;
     [SerializeField] private UnityEvent OnSkillEndEvent;
 
+    protected SkillState skillState = SkillState.Ready;
+
+
     protected virtual void Awake() { }
     protected virtual void Start() { }
-    protected enum SkillState
+
+    protected virtual IEnumerator SkillCoroutine()
     {
-        Ready,
-        Delay,
-        Activating,
-        Waiting,
-        CoolDown
+        OnSkillDelay();
+        if(skillStat.SkillDelay > 0)
+            yield return new WaitForSeconds(skillStat.SkillDelay);
+
+        OnSkillTrigger();
+        if(skillStat.SkillDuration > 0)
+            yield return new WaitForSeconds(skillStat.SkillDuration);
+        
+        
+        if(skillType == SkillType.Independent)
+            yield return new WaitUntil(() => skillState == SkillState.CoolDown);
+        else
+            OnSkillEnd();
+
+        if(skillStat.SkillCD > 0)
+            yield return new WaitForSeconds(skillStat.SkillCD);
+
+        skillState = SkillState.Ready;
+        this.enabled = false;
     }
-
-    protected SkillState skillState = SkillState.Ready;
-    private float skillTimer;
-
-    private void Update()
+    protected virtual IEnumerator SkillCoolDownCoroutine()
     {
-        switch (skillState)
-        { 
-            case SkillState.Delay:
-                if (skillTimer >= skillStat.SkillDelay)
-                {
-                    OnSkillTrigger();
-                }
-                break;
-            case SkillState.Activating:
-                if (skillTimer >= skillStat.SkillDuration)
-                {
-                    OnSkillEnd();
-                }
-                break;
-            case SkillState.CoolDown:
-                if (skillTimer >= skillStat.SkillCD)
-                {
-                    skillState = SkillState.Ready;
-                    skillTimer = 0;
-                    this.enabled = false;
-                }
-                break;
-        }
-        skillTimer += Time.deltaTime;
+        OnSkillEnd();
+        if (skillStat.SkillCD > 0)
+            yield return new WaitForSeconds(skillStat.SkillCD);
+
+        this.enabled = false;
     }
 
 
@@ -59,9 +55,9 @@ public class Skill : MonoBehaviour
     public virtual void Public_ActivateSkill(bool isCanUseSkill) 
     {
         if (!isCanUseSkill || (skillState != SkillState.Ready)) return;
-
-        OnSkillDelay();
+        
         this.enabled = true;
+        StartCoroutine(SkillCoroutine());
     }
     public virtual void Public_DeactivateSkill()
     {
@@ -75,20 +71,19 @@ public class Skill : MonoBehaviour
     /* Phases handlers */
     protected virtual void OnSkillDelay() 
     {
-        OnSkillDelayEvent?.Invoke();
         skillState = SkillState.Delay;
-        skillTimer = 0;
+        OnSkillDelayEvent?.Invoke();
     }
     protected virtual void OnSkillTrigger() 
     {
         skillState = SkillState.Activating;
         OnSkillTriggerEvent?.Invoke();
-        skillTimer = 0;
     }
     protected virtual void OnSkillEnd() 
     {
-        OnSkillEndEvent?.Invoke();
         skillState = SkillState.CoolDown;
-        skillTimer = 0;
+        OnSkillEndEvent?.Invoke();
     }
+    public enum SkillType { Active, Passive, Independent}   // Indepent: Active & independent from skill duration
+    protected enum SkillState{ Ready, Delay, Activating, CoolDown}
 }

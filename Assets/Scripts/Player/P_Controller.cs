@@ -7,7 +7,10 @@ public class P_Controller : MonoBehaviour
     [SerializeField] private P_Stat pStat;
     
     private Rigidbody2D rb;
-    private Animator anim; // Only for horizontal movement
+    private Animator anim;
+
+    private PlayerInput input;
+
     private readonly int moveAnimHash = Animator.StringToHash("moveInput");
     private int moveInput;
 
@@ -22,6 +25,7 @@ public class P_Controller : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        input = GetComponent<PlayerInput>();
     }
     private void Update()
     {
@@ -31,7 +35,7 @@ public class P_Controller : MonoBehaviour
     /* Action handlers */
     private void Action_Move()
     {
-        if (pStat.CanMove)
+        if (pStat.CanMove && input.inputIsActive)
         {
             rb.linearVelocityX = moveInput * pStat.MoveSpeed;
 

@@ -102,46 +102,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pStat: {fileID: 8006996509933729976}
   skillStat: {fileID: 11400000, guid: f1aa3c1163165d44e92b45d4603bfbd6, type: 2}
+  skillType: 2
   OnSkillDelayEvent:
     m_PersistentCalls:
       m_Calls: []
   OnSkillTriggerEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_SetCanMove
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_SetCanUseSkill
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_StopMove
+      - m_Target: {fileID: 169482536035053268}
+        m_TargetAssemblyTypeName: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
+        m_MethodName: DeactivateInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Player Activate Skill Leap
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 8006996509933729976}
@@ -156,31 +133,31 @@ MonoBehaviour:
           m_StringArgument: Player Activate Skill Leap
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 241200981342066881}
+        m_TargetAssemblyTypeName: UnityEngine.Rigidbody2D, UnityEngine
+        m_MethodName: set_gravityScale
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 20
+          m_StringArgument: Player Activate Skill Leap
+          m_BoolArgument: 0
+        m_CallState: 2
   OnSkillEndEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_SetCanMove
-        m_Mode: 6
+      - m_Target: {fileID: 169482536035053268}
+        m_TargetAssemblyTypeName: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
+        m_MethodName: ActivateInput
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_SetCanUseSkill
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Player Skill Leap Landed
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 8006996509933729976}
@@ -195,52 +172,27 @@ MonoBehaviour:
           m_StringArgument: Player Skill Leap Landed
           m_BoolArgument: 1
         m_CallState: 2
-  targetLayerName: Enemy
-  launchForce: {x: 7.5, y: 50}
-  dmgRectangleSize: {x: 4, y: 0.5}
-  dmgRectangleOffset: {x: 0, y: -0.25}
-  gravityDuringLaunch: 15
-  dmgAmount: 15
-  gizmosColor: {r: 1, g: 0, b: 0, a: 1}
-  OnTargetsContactEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3729621482572387713}
-        m_TargetAssemblyTypeName: Health_Handler, Assembly-CSharp
-        m_MethodName: Public_SetLifeStealPercentage
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 25
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3729621482572387713}
-        m_TargetAssemblyTypeName: Health_Handler, Assembly-CSharp
-        m_MethodName: Public_LifeSteal
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 8006996509933729976}
         m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Print
-        m_Mode: 5
+        m_MethodName: Public_ResetGravity
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Player Skill Leap Hit Enemy!
-          m_BoolArgument: 0
+          m_StringArgument: Player Skill Leap Landed
+          m_BoolArgument: 1
         m_CallState: 2
+  targetLayerName: Enemy
+  launchForce: {x: 10, y: 40}
+  dmgAmount: 15
+  dmgRectangleSize: {x: 4, y: 0.5}
+  dmgRectangleOffset: {x: 0, y: -0.25}
+  gizmosColor: {r: 1, g: 0, b: 0, a: 1}
+  OnHitEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2640486404029672466
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,6 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pStat: {fileID: 8006996509933729976}
   skillStat: {fileID: 11400000, guid: 0ad99dfae8f840149833181e8e39a03e, type: 2}
+  skillType: 0
   OnSkillDelayEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1078,31 +1031,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pStat: {fileID: 8006996509933729976}
   skillStat: {fileID: 11400000, guid: 71d3428f20fee91459c8e0129b622961, type: 2}
+  skillType: 0
   OnSkillDelayEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_SetCanMove
-        m_Mode: 6
+      - m_Target: {fileID: 169482536035053268}
+        m_TargetAssemblyTypeName: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
+        m_MethodName: DeactivateInput
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_SetCanUseSkill
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Player Skill Basic Attack
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 8006996509933729976}
@@ -1114,7 +1056,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Player Skill Basic Attack
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 4095836088408486238}
@@ -1147,22 +1089,10 @@ MonoBehaviour:
   OnSkillEndEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_SetCanMove
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_SetCanUseSkill
-        m_Mode: 6
+      - m_Target: {fileID: 169482536035053268}
+        m_TargetAssemblyTypeName: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
+        m_MethodName: ActivateInput
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

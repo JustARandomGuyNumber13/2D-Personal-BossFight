@@ -3,19 +3,21 @@ using UnityEngine.Events;
 
 public class Skill_Leap : Skill
 {
-
     [Header("Skill Exclusive:")]
     [SerializeField] private string targetLayerName;
     [SerializeField] private Vector2 launchForce;
+    [SerializeField] private float dmgAmount;
     [SerializeField] private Vector2 dmgRectangleSize;
     [SerializeField] private Vector2 dmgRectangleOffset;
-    [SerializeField] private float gravityDuringLaunch;
-    [SerializeField] private float dmgAmount;
     [SerializeField] private Color gizmosColor = Color.red;
 
-    [SerializeField] private UnityEvent<float> OnTargetsContactEvent;
- 
+    [SerializeField] private UnityEvent<float> OnHitEvent;
+    private Vector3 launchDir;
 
+    protected override void Start()
+    {
+        pStat.OnLandEvent.AddListener(OnLand);
+    }
     public override void Public_ActivateSkill(bool isCanUseSkill)
     {
         if (!pStat.OnGround) return;
@@ -24,14 +26,14 @@ public class Skill_Leap : Skill
     protected override void OnSkillTrigger()
     {
         base.OnSkillTrigger();
-        pStat.OnGround = false;
-        skillState = SkillState.Waiting;
-        pStat.Public_SetGravity(gravityDuringLaunch);
-        pStat.Public_AddForce(launchForce * transform.lossyScale, ForceMode2D.Impulse);
+        launchDir = launchForce;
+        launchDir.x *= transform.lossyScale.x;
+        pStat.Public_AddForce(launchDir, ForceMode2D.Impulse);
     }
-    public void Public_OnLand()
+
+    private void OnLand()
     {
-        if (!this.enabled || skillState != SkillState.Waiting) return;
+        if (!this.enabled || skillState != SkillState.Activating) return;
 
         RaycastHit2D[] hitList = 
             Physics2D.BoxCastAll(transform.position + (Vector3)dmgRectangleOffset, dmgRectangleSize, 0, Vector2.zero, 0, LayerMask.GetMask(targetLayerName));
@@ -44,8 +46,8 @@ public class Skill_Leap : Skill
 
                 if (colHealth != null)
                 {
-                    colHealth.Public_DecreaseHealth(dmgAmount);
-                    OnTargetsContactEvent?.Invoke(dmgAmount);
+                    pStat.Public_DealDamage(dmgAmount, colHealth);
+                    OnHitEvent?.Invoke(dmgAmount);
                 }
             }
 

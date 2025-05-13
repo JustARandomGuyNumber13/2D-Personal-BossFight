@@ -420,6 +420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pStat: {fileID: 543285384154890599}
   skillStat: {fileID: 11400000, guid: a648c824a9a8577409b64e9f019eeaa3, type: 2}
+  skillType: 2
   OnSkillDelayEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -435,6 +436,18 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: Enemy Activate Skill Leap
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7332574503290608162}
+        m_TargetAssemblyTypeName: UnityEngine.Rigidbody2D, UnityEngine
+        m_MethodName: set_gravityScale
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 15
           m_StringArgument: Enemy Activate Skill Leap
           m_BoolArgument: 0
         m_CallState: 2
@@ -465,14 +478,25 @@ MonoBehaviour:
           m_StringArgument: Enemy Leap landed
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 543285384154890599}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Public_ResetGravity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Enemy Leap landed
+          m_BoolArgument: 0
+        m_CallState: 2
   targetLayerName: Player
   launchForce: {x: 7, y: 40}
+  dmgAmount: 30
   dmgRectangleSize: {x: 5, y: 2}
   dmgRectangleOffset: {x: 0, y: -0.5}
-  gravityDuringLaunch: 10
-  dmgAmount: 30
   gizmosColor: {r: 0.9348427, g: 1, b: 0, a: 1}
-  OnTargetsContactEvent:
+  OnHitEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 543285384154890599}
@@ -638,6 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pStat: {fileID: 543285384154890599}
   skillStat: {fileID: 11400000, guid: 1cd79e92b936e3d49a61a954dbe91e35, type: 2}
+  skillType: 0
   OnSkillDelayEvent:
     m_PersistentCalls:
       m_Calls:
