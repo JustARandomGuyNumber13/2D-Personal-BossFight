@@ -37,19 +37,4 @@ public class Health_Handler : MonoBehaviour
         if(health > charStat.MaxHealth) health = charStat.MaxHealth;
         OnHealthIncreaseEvent?.Invoke(health);
     }
-
-    /* Life steal section */
-    float lifeStealPercentage;
-    public void Public_LifeSteal(float dmgAmount)
-    {
-        if (!pStat.LifeSteal) return;
-
-        health += dmgAmount * lifeStealPercentage / 100;
-        if (health > charStat.MaxHealth) health = charStat.MaxHealth;
-    }
-    public void Public_SetLifeStealPercentage(float amount)
-    {
-        if (!pStat.LifeSteal) return;
-        lifeStealPercentage = amount;
-    }
 }

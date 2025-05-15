@@ -9,31 +9,25 @@ public class P_Stat : MonoBehaviour
     [SerializeField] private Vector3 groundCheckBoxSize;
     [SerializeField] private Vector3 groundCheckBoxOffset;
     [SerializeField] private Color groundCheckBoxColor = Color.blue;
-    public UnityEvent OnLandEvent; // OnGround
-
+    
     public bool OnGround { get; set; }
     public bool CanMove { get; private set; } = true;
     public bool CanUseSkill { get; private set; } = true;
 
-    private Buff lifeStealBuff;
     private float lifeStealPercentage;
-
-    public Buff AdditionalMoveSpeedBuff;
-    private float additionalMoveSpeedPercentage;
-    public float MoveSpeed => charStat.MoveSpeed + (charStat.MoveSpeed * additionalMoveSpeedPercentage / 100);
-
-    private float additionalJumpForce;
-    public float JumpForce => additionalJumpForce + charStat.JumpForce;
-
-    private float additionalDamage;
-    private float additionalDamagePercentage;
-
+    private float moveSpeedPercentage;
+    private float damageAmountPercentage;
+    private float jumpForcePercentage;
+    
+    public float MoveSpeed => charStat.MoveSpeed + (charStat.MoveSpeed * moveSpeedPercentage / 100);
+    public float JumpForce =>  charStat.JumpForce + (charStat.JumpForce * jumpForcePercentage / 100);
+    public UnityEvent OnLandEvent;
 
     private Rigidbody2D rb;
     private Health_Handler health;
     private float orgGravity;
     
-
+    /* Monobehavior type */
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -49,6 +43,7 @@ public class P_Stat : MonoBehaviour
             Helper_GroundCheck(collision);
     }
 
+
     /* Helper type */
     private void Helper_GroundCheck(Collision2D collision)
     {
@@ -61,74 +56,72 @@ public class P_Stat : MonoBehaviour
         }
     }
 
-    /* Modifier type */
-    public void Public_Add_MoveSpeedPercentage(float value)
-    { additionalMoveSpeedPercentage += value; }
-    public void Public_Add_JumpForce(float value)
-    { additionalJumpForce += value; }
-    public void Public_Add_AdditionalDamage(float value)
-    { additionalDamage += value; }
-    public void Public_Add_AdditionalDamagePercentage(float value)
-    { additionalDamagePercentage += value; }
 
-
-    /* Setter type */
-    public void Public_ResetGravity()
-    { rb.gravityScale = orgGravity; }
-
-
-    /* Action type */
+    /* Control type */
     public void Public_DealDamage(float amount, Health_Handler target)
     {
-        float dmgAmount = (amount + additionalDamage) +
-            (amount + additionalDamage) * additionalDamagePercentage / 100;
+        float dmgAmount = amount + (amount * damageAmountPercentage / 100);
         target.Public_DecreaseHealth(dmgAmount); 
-        if(lifeStealBuff.Active) health.Public_IncreaseHealth(dmgAmount * lifeStealPercentage / 100);
+        if(lifeStealPercentage != 0) health.Public_IncreaseHealth(dmgAmount * lifeStealPercentage / 100);
     }
     public void Public_StopMoveOnGround()
     { if (OnGround) rb.linearVelocityX = 0; }
     public void Public_AddForce(Vector2 force, ForceMode2D forceMode)
     { rb.AddForce(force, forceMode); }
+    public void Public_ResetGravity()
+    { rb.gravityScale = orgGravity; }
+
 
     /* Buff type */
-    public void Public_UseBuff_LifeSteal(float duration, float percentage)
+    public void Public_UseBuff(BuffType type, float percentage, float duration)
+    { StartCoroutine(BuffCoroutine(type, percentage, duration)); }
+    private IEnumerator BuffCoroutine(BuffType type, float percentage, float duration)
     {
-        lifeStealPercentage = percentage;
-        lifeStealBuff.Public_UseBuff(duration);
-    }
-    public void Public_UseBuff_AddtionalMoveSpeed(float duration, float percentage)
-    { 
-        additionalMoveSpeedPercentage = percentage;
-        AdditionalMoveSpeedBuff.Public_UseBuff(duration);
+        switch (type)
+        {
+            case BuffType.DamageAmount:
+                damageAmountPercentage += percentage;
+                break;
+            case BuffType.JumpForce:
+                jumpForcePercentage += percentage;
+                break;
+            case BuffType.MoveSpeed:
+                moveSpeedPercentage += percentage; 
+                break;
+            case BuffType.LifeSteal:
+                lifeStealPercentage += percentage;
+                break;
+        }
+
+        if(duration != 0)
+            yield return new WaitForSeconds(duration);
+
+        switch (type)
+        {
+            case BuffType.DamageAmount:
+                damageAmountPercentage -= percentage;
+                break;
+            case BuffType.JumpForce:
+                jumpForcePercentage -= percentage;
+                break;
+            case BuffType.MoveSpeed:
+                moveSpeedPercentage -= percentage;
+                break;
+            case BuffType.LifeSteal:
+                lifeStealPercentage -= percentage;
+                break;
+        }
     }
 
 
+    /* Optional type */
     public void Print(string text)
     { Debug.Log(text, gameObject); }
-
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = groundCheckBoxColor;
         Gizmos.DrawWireCube(transform.position + groundCheckBoxOffset, groundCheckBoxSize);
     }
-}
-public class Buff : MonoBehaviour
-{ 
-    public bool Active;
-    private Coroutine buffCoroutine;
 
-    public void Public_UseBuff(float duration)
-    {
-        if(buffCoroutine != null)
-            StopCoroutine(buffCoroutine);
-
-        buffCoroutine = StartCoroutine(BuffCoroutine(duration));
-    }
-    private IEnumerator BuffCoroutine(float duration)
-    {
-        Active = true;
-        yield return new WaitForSeconds(duration);
-        Active = false;
-    }
+    public enum BuffType { MoveSpeed, DamageAmount, JumpForce, LifeSteal }
 }

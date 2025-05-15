@@ -203,7 +203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3576682650076443985}
   - component: {fileID: 1414039006062956006}
-  - component: {fileID: 4307649056849916330}
+  - component: {fileID: 5887216624155443398}
   m_Layer: 10
   m_Name: Circle-Skill_BloodThirst
   m_TagString: Untagged
@@ -281,16 +281,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4307649056849916330
+--- !u!114 &5887216624155443398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2640486404029672466}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b118638902cd54c438627b66e5640f06, type: 3}
+  m_Script: {fileID: 11500000, guid: 66d7f196f4ae10641859de89013a1d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pStat: {fileID: 8006996509933729976}
@@ -299,10 +299,10 @@ MonoBehaviour:
   OnSkillDelayEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_SetCanMove
-        m_Mode: 6
+      - m_Target: {fileID: 169482536035053268}
+        m_TargetAssemblyTypeName: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
+        m_MethodName: DeactivateInput
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -311,21 +311,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_SetCanUseSkill
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_StopMoveOnGround
+  OnSkillTriggerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 169482536035053268}
+        m_TargetAssemblyTypeName: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
+        m_MethodName: ActivateInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -344,63 +335,12 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Player Activate Skill Blood Thirst
+          m_StringArgument: Player Skill Bloodthirst Activate
           m_BoolArgument: 0
-        m_CallState: 2
-  OnSkillTriggerEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_SetLifeSteal
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_SetCanUseSkill
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 8006996509933729976}
-        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
-        m_MethodName: Public_SetCanMove
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
   OnSkillEndEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3729621482572387713}
-        m_TargetAssemblyTypeName: Health_Handler, Assembly-CSharp
-        m_MethodName: Public_SetLifeStealPercentage
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 20
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 8006996509933729976}
         m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
         m_MethodName: Print
@@ -410,9 +350,13 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Player Skill Blood Thirst Ended
+          m_StringArgument: Player Skill Bloodthirst Deactivate
           m_BoolArgument: 0
         m_CallState: 2
+  lifeStealPercentage: 20
+  additionalMoveSpeedPercentage: 0
+  additionalJumpForcePercentage: 0
+  additionalDamagePercentage: 0
 --- !u!1 &5925472767010936588
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,7 +759,7 @@ MonoBehaviour:
   OnSkillOneEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4307649056849916330}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Skill, Assembly-CSharp
         m_MethodName: Public_ActivateSkill
         m_Mode: 6
