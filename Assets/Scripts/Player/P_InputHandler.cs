@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class P_Controller : MonoBehaviour
+public class P_InputHandler : MonoBehaviour
 {
     [SerializeField] private P_Stat pStat;
     
@@ -12,12 +12,15 @@ public class P_Controller : MonoBehaviour
     private PlayerInput input;
 
     private readonly int moveAnimHash = Animator.StringToHash("moveInput");
+    private readonly int runAnimHash = Animator.StringToHash("run");
+    private readonly int jumpAnimHash = Animator.StringToHash("jump");
+
     private int moveInput;
 
-    [SerializeField] private UnityEvent<bool> OnJumpEvent; // pStat.OnGround
-    [SerializeField] private UnityEvent<bool> OnBasicAttackEvent; // pStat.CanUseSkill
-    [SerializeField] private UnityEvent<bool> OnSkillOneEvent; // pStat.CanUseSkill
-    [SerializeField] private UnityEvent<bool> OnSkillTwoEvent; // pStat.CanUseSkill
+    [SerializeField] private UnityEvent OnJumpEvent; // pStat.OnGround
+    [SerializeField] private UnityEvent OnBasicAttackEvent; // pStat.CanUseSkill
+    [SerializeField] private UnityEvent OnSkillOneEvent; // pStat.CanUseSkill
+    [SerializeField] private UnityEvent OnSkillTwoEvent; // pStat.CanUseSkill
 
 
     /* Monobehavior methods */
@@ -30,6 +33,7 @@ public class P_Controller : MonoBehaviour
     private void Update()
     {
         Action_Move();
+        Helper_MoveAnimation();
     }
 
     /* Action handlers */
@@ -42,10 +46,16 @@ public class P_Controller : MonoBehaviour
             if (moveInput != 0 && moveInput != transform.localScale.x)
                 transform.localScale = new Vector3(moveInput, 1, 1);
             
-            if (anim.GetInteger(moveAnimHash) != moveInput)
-                anim.SetInteger(moveAnimHash, moveInput);
+            //if (anim.GetInteger(moveAnimHash) != moveInput)
+            //    anim.SetInteger(moveAnimHash, moveInput);
         }
     }
+    private void Helper_MoveAnimation()
+    { 
+        if(anim.GetInteger(moveAnimHash) != moveInput)
+            anim.SetInteger(moveAnimHash, moveInput);
+    }
+
     private void Action_Jump()
     {
         if (!pStat.CanMove || !pStat.CanUseSkill || !pStat.OnGround) return;
@@ -53,14 +63,17 @@ public class P_Controller : MonoBehaviour
         rb.linearVelocityY = 0;
         rb.AddForce(Vector2.up * pStat.JumpForce, ForceMode2D.Impulse);
         pStat.OnGround = false;
-        OnJumpEvent?.Invoke(pStat.OnGround);
+        OnJumpEvent?.Invoke();
     }
-
 
     /* Input handlers*/
     private void OnMove(InputValue value)
     { 
         moveInput = (int) Mathf.Ceil(value.Get<float>());
+    }
+    private void OnSprint(InputValue value)
+    {
+        anim.SetBool(runAnimHash, (int)Mathf.Ceil(value.Get<float>()) == 1);
     }
     private void OnJump(InputValue value)
     {
@@ -69,14 +82,14 @@ public class P_Controller : MonoBehaviour
     }
     private void OnBasicAttack()
     {
-        OnBasicAttackEvent?.Invoke(pStat.CanUseSkill);
+        if (pStat.CanUseSkill) OnBasicAttackEvent?.Invoke();
     }
     private void OnSkillOne()
     {
-        OnSkillOneEvent?.Invoke(pStat.CanUseSkill);
+        if (pStat.CanUseSkill) OnSkillOneEvent?.Invoke();
     }
     private void OnSkillTwo()
     {
-        OnSkillTwoEvent?.Invoke(pStat.CanUseSkill);
+        if (pStat.CanUseSkill) OnSkillTwoEvent?.Invoke();
     }
 }
