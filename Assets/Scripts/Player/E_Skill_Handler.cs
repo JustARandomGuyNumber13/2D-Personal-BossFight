@@ -10,7 +10,13 @@ public class E_Skill_Handler : MonoBehaviour
 
     public float SkillCD { get { return skillCD; } }
     public float SkillRequireRange { get { return skillRequireRange; } }
+    private P_Stat pStat;
 
+
+    private void Awake()
+    {
+        pStat = GetComponent<P_Stat>();
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = gizmosColor;
@@ -19,6 +25,6 @@ public class E_Skill_Handler : MonoBehaviour
 
     public void Public_ActivateSkill()
     {
-        skill.Public_ActivateSkill(true);
+        skill.Public_ActivateSkill(pStat);
     }
 }

@@ -8,6 +8,7 @@ public class P_Animator : MonoBehaviour
     private readonly int landAnimHash = Animator.StringToHash("land");
     private int useSkillHash = Animator.StringToHash("useSkill");
     private int skillIndexHash = Animator.StringToHash("skillIndex");
+    private int endSkillIndexHash = Animator.StringToHash("skillEnd");
 
     private void Awake()
     {
@@ -27,5 +28,9 @@ public class P_Animator : MonoBehaviour
     { 
         anim.SetInteger(skillIndexHash, index);
         anim.SetTrigger(useSkillHash);
+    }
+    public void Public_EndSkill(bool value)
+    {
+        anim.SetBool(endSkillIndexHash, value);
     }
 }

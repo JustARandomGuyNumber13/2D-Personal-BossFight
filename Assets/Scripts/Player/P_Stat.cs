@@ -66,6 +66,8 @@ public class P_Stat : MonoBehaviour
     }
     public void Public_StopMoveOnGround()
     { if (OnGround) rb.linearVelocityX = 0; }
+    public void Public_SetVelocity(Vector3 velocity)
+    { rb.linearVelocity = velocity; }
     public void Public_AddForce(Vector2 force, ForceMode2D forceMode)
     { rb.AddForce(force, forceMode); }
     public void Public_ResetGravity()

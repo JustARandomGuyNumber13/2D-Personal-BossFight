@@ -18,9 +18,9 @@ public class P_InputHandler : MonoBehaviour
     private int moveInput;
 
     [SerializeField] private UnityEvent OnJumpEvent; // pStat.OnGround
-    [SerializeField] private UnityEvent OnBasicAttackEvent; // pStat.CanUseSkill
-    [SerializeField] private UnityEvent OnSkillOneEvent; // pStat.CanUseSkill
-    [SerializeField] private UnityEvent OnSkillTwoEvent; // pStat.CanUseSkill
+    [SerializeField] private UnityEvent<P_Stat> OnBasicAttackEvent; // pStat.CanUseSkill
+    [SerializeField] private UnityEvent<P_Stat> OnSkillOneEvent; // pStat.CanUseSkill
+    [SerializeField] private UnityEvent<P_Stat> OnSkillTwoEvent; // pStat.CanUseSkill
 
 
     /* Monobehavior methods */
@@ -45,9 +45,6 @@ public class P_InputHandler : MonoBehaviour
 
             if (moveInput != 0 && moveInput != transform.localScale.x)
                 transform.localScale = new Vector3(moveInput, 1, 1);
-            
-            //if (anim.GetInteger(moveAnimHash) != moveInput)
-            //    anim.SetInteger(moveAnimHash, moveInput);
         }
     }
     private void Helper_MoveAnimation()
@@ -82,14 +79,14 @@ public class P_InputHandler : MonoBehaviour
     }
     private void OnBasicAttack()
     {
-        if (pStat.CanUseSkill) OnBasicAttackEvent?.Invoke();
+        if (pStat.CanUseSkill) OnBasicAttackEvent?.Invoke(pStat);
     }
     private void OnSkillOne()
     {
-        if (pStat.CanUseSkill) OnSkillOneEvent?.Invoke();
+        if (pStat.CanUseSkill) OnSkillOneEvent?.Invoke(pStat);
     }
     private void OnSkillTwo()
     {
-        if (pStat.CanUseSkill) OnSkillTwoEvent?.Invoke();
+        if (pStat.CanUseSkill) OnSkillTwoEvent?.Invoke(pStat);
     }
 }

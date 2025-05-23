@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class Skill : MonoBehaviour
 {
     [Header("Parent components:")]
-    [SerializeField] protected P_Stat pStat;
+    protected P_Stat pStat;
     [SerializeField] protected SO_SkillStat skillStat;
     [SerializeField] protected SkillType skillType = SkillType.Active;
 
@@ -52,10 +52,11 @@ public class Skill : MonoBehaviour
 
 
     /* Public handlers */
-    public virtual void Public_ActivateSkill(bool isCanUseSkill) 
+    public virtual void Public_ActivateSkill(P_Stat pStat) 
     {
-        if (!isCanUseSkill || (skillState != SkillState.Ready)) return;
-        
+        if ((skillState != SkillState.Ready)) return;
+
+        this.pStat = pStat;
         this.enabled = true;
         StartCoroutine(SkillCoroutine());
     }

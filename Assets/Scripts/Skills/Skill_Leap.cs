@@ -18,10 +18,10 @@ public class Skill_Leap : Skill
     {
         pStat.OnLandEvent.AddListener(OnLand);
     }
-    public override void Public_ActivateSkill(bool isCanUseSkill)
+    public override void Public_ActivateSkill(P_Stat pStat)
     {
         if (!pStat.OnGround) return;
-        base.Public_ActivateSkill(isCanUseSkill);
+        base.Public_ActivateSkill(pStat);
     }
     protected override void OnSkillTrigger()
     {
