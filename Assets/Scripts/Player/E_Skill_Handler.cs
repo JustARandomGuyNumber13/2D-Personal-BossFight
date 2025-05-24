@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class E_Skill_Handler : MonoBehaviour
 {
-    public SO_SkillStat skillStat;
-    [SerializeField] private Skill skill;
+    private Skill skill;
     [SerializeField] private float skillRequireRange;
     [SerializeField] private float skillCD;
     [SerializeField] private Color gizmosColor = Color.white;
@@ -15,7 +14,8 @@ public class E_Skill_Handler : MonoBehaviour
 
     private void Awake()
     {
-        pStat = GetComponent<P_Stat>();
+        pStat = transform.parent.GetComponent<P_Stat>();
+        skill = GetComponent<Skill>();
     }
     private void OnDrawGizmosSelected()
     {
@@ -23,8 +23,10 @@ public class E_Skill_Handler : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + Vector3.right * skillRequireRange);
     }
 
-    public void Public_ActivateSkill()
+    public bool Public_ActivateSkill()
     {
+        if (skill.State != Skill.SkillState.Ready) return false;
         skill.Public_ActivateSkill(pStat);
+        return skill.State == Skill.SkillState.Activating;
     }
 }

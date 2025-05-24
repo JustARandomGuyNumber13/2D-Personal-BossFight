@@ -1,0 +1,634 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2889808922736248172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8239119142683907664}
+  - component: {fileID: 5888762420804084055}
+  - component: {fileID: 897795159839550601}
+  m_Layer: 9
+  m_Name: Skill-Attack1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8239119142683907664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2889808922736248172}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8559495807048443046}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5888762420804084055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2889808922736248172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f205779af7dff4438a841756cb1e2df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillStat: {fileID: 11400000, guid: 81829aac4557d7e41aa67c137973bc61, type: 2}
+  skillType: 0
+  OnSkillDelayEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7117657209814635700}
+        m_TargetAssemblyTypeName: P_Animator, Assembly-CSharp
+        m_MethodName: Public_UseSkill
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnSkillTriggerEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSkillEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  targetLayerName: 
+  dmgAmount: 0
+  atkBoxSize: {x: 3.82, y: 3.22, z: 0}
+  atkBoxOffset: {x: 1.66, y: -0.79, z: 0}
+  gizmosColor: {r: 1, g: 0, b: 0, a: 1}
+  OnHitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &897795159839550601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2889808922736248172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28efcf3832978c44589bed2083ed1a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillRequireRange: 3
+  skillCD: 2
+  gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &3492466455086388055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1157652896418119133}
+  - component: {fileID: 978350104335538226}
+  m_Layer: 0
+  m_Name: Sprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1157652896418119133
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3492466455086388055}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8559495807048443046}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &978350104335538226
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3492466455086388055}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -1110028337
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -2039633862, guid: 47cb27dd148e257428dd77bd6068dedc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.28, y: 1.28}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &4143973534991800341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8559495807048443046}
+  - component: {fileID: 9085998798513265858}
+  - component: {fileID: 5957754810012878511}
+  - component: {fileID: 6372571219383317057}
+  - component: {fileID: 8952794191793072539}
+  - component: {fileID: 7117657209814635700}
+  - component: {fileID: 2716849607764084958}
+  - component: {fileID: 1969336433312227458}
+  m_Layer: 9
+  m_Name: Enemy-Knight Skeleton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8559495807048443046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143973534991800341}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1157652896418119133}
+  - {fileID: 8239119142683907664}
+  - {fileID: 9060914362540329864}
+  - {fileID: 2406965024443168845}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &9085998798513265858
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143973534991800341}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!70 &5957754810012878511
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143973534991800341}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.15, y: -2.4}
+  m_Size: {x: 1, y: 3.5}
+  m_Direction: 0
+--- !u!95 &6372571219383317057
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143973534991800341}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ea36cd699cc0c81458650853fdbc1691, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8952794191793072539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143973534991800341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graph: {fileID: 8143499161272074269, guid: f4020ac6560f909439b188aec8cb334e, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 4129335208412709131
+  - rid: 4129335208412709274
+  - rid: 4129335214329561306
+  - rid: 4129335214329561305
+  - rid: 4129335214329561304
+  - rid: 4129335208412709656
+  - rid: 4129335214329561307
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 4129335208412709131
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Bot
+        m_Value: {fileID: 4143973534991800341}
+    - rid: 4129335208412709274
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 14428694420788609790
+          m_Value1: 12209046212218521211
+        Name: Target
+        m_Value: {fileID: 8559495807048443046}
+    - rid: 4129335208412709656
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1452075043778668053
+          m_Value1: 3614215830030789185
+        Name: MoveSpeed
+        m_Value: 5
+    - rid: 4129335214329561304
+      type: {class: 'BlackboardVariable`1[[E_Skill_Handler, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1587141365366444128
+          m_Value1: 16474719939029848477
+        Name: Attack One
+        m_Value: {fileID: 897795159839550601}
+    - rid: 4129335214329561305
+      type: {class: 'BlackboardVariable`1[[E_Skill_Handler, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 16663399914025814095
+          m_Value1: 11478228037758580197
+        Name: Attack Two
+        m_Value: {fileID: 1235687844934299010}
+    - rid: 4129335214329561306
+      type: {class: 'BlackboardVariable`1[[E_Skill_Handler, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 9475800642732730554
+          m_Value1: 14904968136967209231
+        Name: Attack Three
+        m_Value: {fileID: 7681193984419841413}
+    - rid: 4129335214329561307
+      type: {class: 'BlackboardVariable`1[[P_Stat, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 6766027640762142568
+          m_Value1: 17941698684071053875
+        Name: Stat
+        m_Value: {fileID: 2716849607764084958}
+--- !u!114 &7117657209814635700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143973534991800341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6796a4b9c467b640bf85e23e80e53af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2716849607764084958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143973534991800341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccd35711f11e5e94cb95e77e884fbadd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charStat: {fileID: 11400000, guid: 62697330797646046b1ccfe19e3cce6a, type: 2}
+  groundCheckBoxSize: {x: 0, y: 0, z: 0}
+  groundCheckBoxOffset: {x: 0, y: 0, z: 0}
+  groundCheckBoxColor: {r: 0, g: 0, b: 1, a: 1}
+  OnLandEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1969336433312227458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143973534991800341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5abd2295a57ba654e9bc5c25f8c5a52f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charStat: {fileID: 11400000, guid: 62697330797646046b1ccfe19e3cce6a, type: 2}
+  OnHealthDecreaseEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7117657209814635700}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHealthIncreaseEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &4458891602593799311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9060914362540329864}
+  - component: {fileID: 3923143884795331381}
+  - component: {fileID: 1235687844934299010}
+  m_Layer: 9
+  m_Name: Skill-Attack2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9060914362540329864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4458891602593799311}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8559495807048443046}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3923143884795331381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4458891602593799311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f205779af7dff4438a841756cb1e2df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillStat: {fileID: 11400000, guid: 68d50c22648af8d46b85449fdda2cd95, type: 2}
+  skillType: 0
+  OnSkillDelayEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7117657209814635700}
+        m_TargetAssemblyTypeName: P_Animator, Assembly-CSharp
+        m_MethodName: Public_UseSkill
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnSkillTriggerEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSkillEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  targetLayerName: 
+  dmgAmount: 0
+  atkBoxSize: {x: 4.2, y: 2.78, z: 0}
+  atkBoxOffset: {x: 1.8, y: -0.58, z: 0}
+  gizmosColor: {r: 1, g: 0, b: 0, a: 1}
+  OnHitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1235687844934299010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4458891602593799311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28efcf3832978c44589bed2083ed1a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillRequireRange: 3
+  skillCD: 2
+  gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &8200575860179763820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2406965024443168845}
+  - component: {fileID: 5650055059241725799}
+  - component: {fileID: 7681193984419841413}
+  m_Layer: 9
+  m_Name: Skill-Attack3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2406965024443168845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200575860179763820}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8559495807048443046}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5650055059241725799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200575860179763820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f205779af7dff4438a841756cb1e2df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillStat: {fileID: 11400000, guid: e5d3dad66bac31d4f800de9614a5d65f, type: 2}
+  skillType: 0
+  OnSkillDelayEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7117657209814635700}
+        m_TargetAssemblyTypeName: P_Animator, Assembly-CSharp
+        m_MethodName: Public_UseSkill
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnSkillTriggerEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSkillEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  targetLayerName: 
+  dmgAmount: 0
+  atkBoxSize: {x: 2.95, y: 2.79, z: 0}
+  atkBoxOffset: {x: 1.81, y: -1.64, z: 0}
+  gizmosColor: {r: 1, g: 0, b: 0, a: 1}
+  OnHitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7681193984419841413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200575860179763820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28efcf3832978c44589bed2083ed1a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillRequireRange: 3
+  skillCD: 2
+  gizmosColor: {r: 1, g: 1, b: 1, a: 1}

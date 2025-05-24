@@ -13,7 +13,7 @@ public class Skill : MonoBehaviour
     [SerializeField] private UnityEvent OnSkillTriggerEvent;
     [SerializeField] private UnityEvent OnSkillEndEvent;
 
-    protected SkillState skillState = SkillState.Ready;
+    public SkillState State = SkillState.Ready;
 
 
     protected virtual void Awake() { }
@@ -31,14 +31,14 @@ public class Skill : MonoBehaviour
         
         
         if(skillType == SkillType.Independent)
-            yield return new WaitUntil(() => skillState == SkillState.CoolDown);
+            yield return new WaitUntil(() => State == SkillState.CoolDown);
         else
             OnSkillEnd();
 
         if(skillStat.SkillCD > 0)
             yield return new WaitForSeconds(skillStat.SkillCD);
 
-        skillState = SkillState.Ready;
+        State = SkillState.Ready;
         this.enabled = false;
     }
     protected virtual IEnumerator SkillCoolDownCoroutine()
@@ -54,7 +54,7 @@ public class Skill : MonoBehaviour
     /* Public handlers */
     public virtual void Public_ActivateSkill(P_Stat pStat) 
     {
-        if ((skillState != SkillState.Ready)) return;
+        if ((State != SkillState.Ready)) return;
 
         this.pStat = pStat;
         this.enabled = true;
@@ -62,7 +62,7 @@ public class Skill : MonoBehaviour
     }
     public virtual void Public_DeactivateSkill()
     {
-        if (skillState == SkillState.CoolDown || !this.enabled) return;
+        if (State == SkillState.CoolDown || !this.enabled) return;
 
         OnSkillEndEvent?.Invoke();
         OnSkillEnd();
@@ -72,19 +72,19 @@ public class Skill : MonoBehaviour
     /* Phases handlers */
     protected virtual void OnSkillDelay() 
     {
-        skillState = SkillState.Delay;
+        State = SkillState.Delay;
         OnSkillDelayEvent?.Invoke();
     }
     protected virtual void OnSkillTrigger() 
     {
-        skillState = SkillState.Activating;
+        State = SkillState.Activating;
         OnSkillTriggerEvent?.Invoke();
     }
     protected virtual void OnSkillEnd() 
     {
-        skillState = SkillState.CoolDown;
+        State = SkillState.CoolDown;
         OnSkillEndEvent?.Invoke();
     }
     public enum SkillType { Active, Passive, Independent}   // Indepent: Active & independent from skill duration
-    protected enum SkillState{ Ready, Delay, Activating, CoolDown}
+    public enum SkillState{ Ready, Delay, Activating, CoolDown}
 }

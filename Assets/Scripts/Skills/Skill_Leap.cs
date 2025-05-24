@@ -33,7 +33,7 @@ public class Skill_Leap : Skill
 
     private void OnLand()
     {
-        if (!this.enabled || skillState != SkillState.Activating) return;
+        if (!this.enabled || State != SkillState.Activating) return;
 
         RaycastHit2D[] hitList = 
             Physics2D.BoxCastAll(transform.position + (Vector3)dmgRectangleOffset, dmgRectangleSize, 0, Vector2.zero, 0, LayerMask.GetMask(targetLayerName));

@@ -13,7 +13,6 @@ public class P_InputHandler : MonoBehaviour
 
     private readonly int moveAnimHash = Animator.StringToHash("moveInput");
     private readonly int runAnimHash = Animator.StringToHash("run");
-    private readonly int jumpAnimHash = Animator.StringToHash("jump");
 
     private int moveInput;
 
