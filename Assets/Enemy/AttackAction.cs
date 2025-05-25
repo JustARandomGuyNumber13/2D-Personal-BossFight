@@ -6,48 +6,50 @@ using Unity.Properties;
 using System.Threading;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "Attack ", story: "If [Target] is in [Agent] [Skill] range, use skill then go to [Cooldown] mode", category: "Action", id: "495eddf04e1fc68674765442a79287b6")]
+[NodeDescription(name: "Attack ", story: "If [Target] is in [Skill] range, use skill. Check [CD]", category: "Action", id: "495eddf04e1fc68674765442a79287b6")]
 public partial class AttackAction : Action
 {
-    [SerializeReference] public BlackboardVariable<Transform> Target;
-    [SerializeReference] public BlackboardVariable<Transform> Agent;
-    [SerializeReference] public BlackboardVariable<E_Skill_Handler> Skill;
-    [SerializeReference] public BlackboardVariable<bool> Cooldown;
-    private float m_Timer = 0.0f;
+    [SerializeReference] public BlackboardVariable<E_Controller> Target;
+    [SerializeReference] public BlackboardVariable<int> Skill;
+    [SerializeReference] public BlackboardVariable<bool> CD;
+    float timer;
+    bool active;
 
     protected override Status OnStart()
     {
-        float distance = Vector3.Distance(Target.Value.position, Agent.Value.position);
-        if (distance <= Skill.Value.SkillRequireRange && Skill.Value.Public_ActivateSkill())
+        if (!active && !CD && Target.Value.P_UseSkill(Skill))
         {
-            Cooldown.Value = true;
-            m_Timer = Skill.Value.SkillCD;
+            timer = Target.Value.P_GetSkill(Skill).SkillCD;
+            active = true;
+            CD.Value = true;
         }
-        else
-            return Status.Failure;
 
-        if (m_Timer <= 0.0f)
+        if (!active)
         {
-            Debug.Log("Cooldown end");
-            Cooldown.Value = false;
+            return Status.Failure;
+        }
+        if (active && timer <= 0.0f)
+        {
+            CD.Value = false;
+            active = false;
             return Status.Success;
         }
 
         return Status.Running;
     }
+
 
     protected override Status OnUpdate()
     {
-        m_Timer -= Time.deltaTime;
-        if (m_Timer <= 0)
+        timer -= Time.deltaTime;
+        if (active && timer <= 0)
         {
+            CD.Value = false;
+            active = false;
             return Status.Success;
         }
-        return Status.Running;
-    }
 
-    protected override void OnEnd()
-    {
+        return Status.Running;
     }
 }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class E_Skill_Handler : MonoBehaviour
+public class E_Skill_Handler : MonoBehaviour 
 {
     private Skill skill;
     [SerializeField] private float skillRequireRange;

@@ -62,12 +62,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2716849607764084958}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Print
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: skill 1
+          m_BoolArgument: 0
+        m_CallState: 2
   OnSkillTriggerEvent:
     m_PersistentCalls:
       m_Calls: []
   OnSkillEndEvent:
     m_PersistentCalls:
       m_Calls: []
+  State: 0
   targetLayerName: 
   dmgAmount: 0
   atkBoxSize: {x: 3.82, y: 3.22, z: 0}
@@ -194,6 +207,7 @@ GameObject:
   - component: {fileID: 7117657209814635700}
   - component: {fileID: 2716849607764084958}
   - component: {fileID: 1969336433312227458}
+  - component: {fileID: 3723911036655030682}
   m_Layer: 9
   m_Name: Enemy-Knight Skeleton
   m_TagString: Untagged
@@ -322,11 +336,8 @@ MonoBehaviour:
   m_BlackboardVariableOverridesList:
   - rid: 4129335208412709131
   - rid: 4129335208412709274
-  - rid: 4129335214329561306
-  - rid: 4129335214329561305
-  - rid: 4129335214329561304
-  - rid: 4129335208412709656
   - rid: 4129335214329561307
+  - rid: 4129335225779486724
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
@@ -348,38 +359,6 @@ MonoBehaviour:
           m_Value1: 12209046212218521211
         Name: Target
         m_Value: {fileID: 8559495807048443046}
-    - rid: 4129335208412709656
-      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 1452075043778668053
-          m_Value1: 3614215830030789185
-        Name: MoveSpeed
-        m_Value: 5
-    - rid: 4129335214329561304
-      type: {class: 'BlackboardVariable`1[[E_Skill_Handler, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 1587141365366444128
-          m_Value1: 16474719939029848477
-        Name: Attack One
-        m_Value: {fileID: 897795159839550601}
-    - rid: 4129335214329561305
-      type: {class: 'BlackboardVariable`1[[E_Skill_Handler, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 16663399914025814095
-          m_Value1: 11478228037758580197
-        Name: Attack Two
-        m_Value: {fileID: 1235687844934299010}
-    - rid: 4129335214329561306
-      type: {class: 'BlackboardVariable`1[[E_Skill_Handler, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 9475800642732730554
-          m_Value1: 14904968136967209231
-        Name: Attack Three
-        m_Value: {fileID: 7681193984419841413}
     - rid: 4129335214329561307
       type: {class: 'BlackboardVariable`1[[P_Stat, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -388,6 +367,14 @@ MonoBehaviour:
           m_Value1: 17941698684071053875
         Name: Stat
         m_Value: {fileID: 2716849607764084958}
+    - rid: 4129335225779486724
+      type: {class: 'BlackboardVariable`1[[E_Controller, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 8689642450462378622
+          m_Value1: 7367037648331010740
+        Name: E_Controller
+        m_Value: {fileID: 3723911036655030682}
 --- !u!114 &7117657209814635700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,6 +437,24 @@ MonoBehaviour:
   OnHealthIncreaseEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3723911036655030682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143973534991800341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9bab46644fdba34484919164fa05876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eStat: {fileID: 2716849607764084958}
+  target: {fileID: 0}
+  basicAttack: {fileID: 897795159839550601}
+  skillOne: {fileID: 1235687844934299010}
+  skillTwo: {fileID: 7681193984419841413}
+  offSet: 2
 --- !u!1 &4458891602593799311
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,12 +517,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2716849607764084958}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Print
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: skill 2
+          m_BoolArgument: 0
+        m_CallState: 2
   OnSkillTriggerEvent:
     m_PersistentCalls:
       m_Calls: []
   OnSkillEndEvent:
     m_PersistentCalls:
       m_Calls: []
+  State: 0
   targetLayerName: 
   dmgAmount: 0
   atkBoxSize: {x: 4.2, y: 2.78, z: 0}
@@ -603,12 +621,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2716849607764084958}
+        m_TargetAssemblyTypeName: P_Stat, Assembly-CSharp
+        m_MethodName: Print
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: skill 3
+          m_BoolArgument: 0
+        m_CallState: 2
   OnSkillTriggerEvent:
     m_PersistentCalls:
       m_Calls: []
   OnSkillEndEvent:
     m_PersistentCalls:
       m_Calls: []
+  State: 0
   targetLayerName: 
   dmgAmount: 0
   atkBoxSize: {x: 2.95, y: 2.79, z: 0}

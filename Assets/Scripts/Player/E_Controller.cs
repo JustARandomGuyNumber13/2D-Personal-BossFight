@@ -1,105 +1,92 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class E_Controller : MonoBehaviour
 {
-    public enum EnemyState
-    { 
-        Idle,
-        Waiting,
-        Walking,
-        CoolDown,
-        Attacking,
-         Die
-    }
-
     [SerializeField] private P_Stat eStat;
-    [SerializeField] private Transform pTransform;
+    [SerializeField] private Transform target;
+    
 
-    public EnemyState enemyState = EnemyState.Idle;
     [SerializeField] private E_Skill_Handler basicAttack, skillOne, skillTwo;
-    private E_Skill_Handler curSkill;
     private Rigidbody2D rb;
+    private Animator anim;
+    private Transform _transform;
 
+    float distance;
     private int basicAtkCount;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        _transform = rb.transform;
     }
-    private void Update()
+    
+    public bool P_UseSkill(int skillIndex)
     {
-        switch (enemyState)
+        bool result = false;
+        distance = Vector3.Distance(_transform.position, target.position);
+        switch (skillIndex)
         {
-            case EnemyState.Walking:
-                WalkToTarget();
+            case 0:
+                if(distance <= basicAttack.SkillRequireRange)
+                    if (basicAttack.Public_ActivateSkill()) result =  true;
                 break;
-                
-            case EnemyState.Attacking:
-                UseSkill();
+            case 1:
+                if (distance <= skillOne.SkillRequireRange)
+                    if (skillOne.Public_ActivateSkill()) result = true;
+                break;
+            case 2:
+                if (distance <= skillTwo.SkillRequireRange)
+                    if (skillTwo.Public_ActivateSkill()) result = true;
                 break;
         }
-        
-    }
 
-    public void Public_Start()
-    {
-        ChooseSkill();
-        enemyState = EnemyState.Walking;
-    }
-    public void Public_ResetState()
-    {
-        StartCoroutine(ResetStateCoroutine());
-    }
-    private IEnumerator ResetStateCoroutine()
-    {
-        enemyState = EnemyState.CoolDown;
-        yield return new WaitForSeconds(curSkill.SkillCD);
-        ChooseSkill();
-        enemyState = EnemyState.Walking;
-    }
-
-    /* Skill handler */
-    private void ChooseSkill()
-    {
-        if (basicAtkCount != 0)
+        if (result)
         {
-            curSkill = basicAttack;
-            basicAtkCount--;
+            rb.linearVelocityX = 0;
+            anim.SetFloat("moveSpeed", 0);
         }
-        else
-        {
-            curSkill = Random.Range(1, 3) == 1 ? skillOne : skillTwo;
-            basicAtkCount = Random.Range(1, 5);
-        }
+        return result;
     }
-    private void UseSkill()
+    public E_Skill_Handler P_GetSkill(int skillIndex)
     {
-        curSkill.Public_ActivateSkill();
-        enemyState = EnemyState.Waiting;
+        switch (skillIndex)
+        {
+            case 0:
+                return basicAttack;
+            case 1:
+                return skillOne;
+            case 2:
+                return skillTwo;
+        }
+        return null;
     }
 
     /* Movement handler */
     [SerializeField] float offSet;
-    private void WalkToTarget()
+    public void P_WalkToTarget()
     {
-        if (eStat.CanMove)
+        LookAtTarget();
+        distance = Vector3.Distance(_transform.position, target.position);
+        if (eStat.CanMove && Mathf.Abs(distance) > offSet)
         {
-            LookAtTarget();
             rb.linearVelocityX = eStat.MoveSpeed * transform.lossyScale.x;
-            if (Mathf.Abs(transform.position.x - pTransform.position.x) <= curSkill.SkillRequireRange)
-            {
-                enemyState = EnemyState.Attacking;
-                rb.linearVelocityX = 0;
-            }
+            anim.SetFloat("moveSpeed", 0.2f);
+        }
+        else
+        {
+            anim.SetFloat("moveSpeed", 0);
+            rb.linearVelocityX = 0;
         }
     }
+
+    bool lookRight;
     private void LookAtTarget()
     {
-        if (transform.position.x < pTransform.position.x)
-            transform.localScale = Vector3.one;
-        else if (transform.position.x > pTransform.position.x)
-            transform.localScale = new Vector3(-1, 1, 1);
+        lookRight = _transform.position.x < target.position.x;
+        transform.localScale = new Vector3(lookRight ? 1 : -1, 1, 1);
     }
 }
 
