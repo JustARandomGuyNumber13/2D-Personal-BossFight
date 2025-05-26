@@ -6,12 +6,13 @@ using Unity.Properties;
 using System.Threading;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "Attack ", story: "If [Target] is in [Skill] range, use skill. Check [CD]", category: "Action", id: "495eddf04e1fc68674765442a79287b6")]
+[NodeDescription(name: "Attack ", story: "If [Target] is in [Skill] range, use skill. Check [CD] and [Defense]", category: "Action", id: "495eddf04e1fc68674765442a79287b6")]
 public partial class AttackAction : Action
 {
     [SerializeReference] public BlackboardVariable<E_Controller> Target;
     [SerializeReference] public BlackboardVariable<int> Skill;
     [SerializeReference] public BlackboardVariable<bool> CD;
+    [SerializeReference] public BlackboardVariable<bool> Defense;
     float timer;
     bool active;
 
@@ -22,6 +23,8 @@ public partial class AttackAction : Action
             timer = Target.Value.P_GetSkill(Skill).SkillCD;
             active = true;
             CD.Value = true;
+            Defense.Value = false;
+            return Status.Success;
         }
 
         if (!active)

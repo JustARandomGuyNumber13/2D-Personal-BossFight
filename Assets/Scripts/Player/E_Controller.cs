@@ -14,7 +14,6 @@ public class E_Controller : MonoBehaviour
     private Transform _transform;
 
     float distance;
-    private int basicAtkCount;
 
     private void Awake()
     {
@@ -22,7 +21,15 @@ public class E_Controller : MonoBehaviour
         anim = GetComponent<Animator>();
         _transform = rb.transform;
     }
-    
+    public void P_Defense()
+    {
+        rb.linearVelocityX = 0;
+        anim.SetBool("defense", true);
+    }
+    public bool P_SkillsAvailable()
+    {
+        return basicAttack.P_Ready() || skillOne.P_Ready() || skillTwo.P_Ready();
+    }
     public bool P_UseSkill(int skillIndex)
     {
         bool result = false;
@@ -46,6 +53,7 @@ public class E_Controller : MonoBehaviour
         if (result)
         {
             rb.linearVelocityX = 0;
+            anim.SetBool("defense", false);
             anim.SetFloat("moveSpeed", 0);
         }
         return result;
@@ -66,14 +74,14 @@ public class E_Controller : MonoBehaviour
 
     /* Movement handler */
     [SerializeField] float offSet;
-    public void P_WalkToTarget()
+    public void P_MoveToTarget(bool isWalk)
     {
-        LookAtTarget();
+        P_LookAtTarget();
         distance = Vector3.Distance(_transform.position, target.position);
         if (eStat.CanMove && Mathf.Abs(distance) > offSet)
         {
-            rb.linearVelocityX = eStat.MoveSpeed * transform.lossyScale.x;
-            anim.SetFloat("moveSpeed", 0.2f);
+            rb.linearVelocityX = (isWalk ? eStat.MoveSpeed : eStat.RunSpeed) * transform.lossyScale.x;
+            anim.SetFloat("moveSpeed", isWalk ? 0.2f : 1f);
         }
         else
         {
@@ -83,7 +91,7 @@ public class E_Controller : MonoBehaviour
     }
 
     bool lookRight;
-    private void LookAtTarget()
+    public void P_LookAtTarget()
     {
         lookRight = _transform.position.x < target.position.x;
         transform.localScale = new Vector3(lookRight ? 1 : -1, 1, 1);

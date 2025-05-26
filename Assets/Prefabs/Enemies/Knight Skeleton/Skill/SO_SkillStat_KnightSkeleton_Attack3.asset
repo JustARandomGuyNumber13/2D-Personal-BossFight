@@ -16,4 +16,4 @@ MonoBehaviour:
   skillImage: {fileID: 0}
   skillDelay: 0
   skillDuration: 0.32
-  skillCD: 15
+  skillCD: 30

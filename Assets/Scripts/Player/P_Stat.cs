@@ -20,6 +20,7 @@ public class P_Stat : MonoBehaviour
     private float jumpForcePercentage;
     
     public float MoveSpeed => charStat.MoveSpeed + (charStat.MoveSpeed * moveSpeedPercentage / 100);
+    public float RunSpeed => charStat.RunSpeed;
     public float JumpForce =>  charStat.JumpForce + (charStat.JumpForce * jumpForcePercentage / 100);
     public UnityEvent OnLandEvent;
 

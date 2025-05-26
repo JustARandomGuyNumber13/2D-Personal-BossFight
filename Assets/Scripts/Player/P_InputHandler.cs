@@ -15,6 +15,7 @@ public class P_InputHandler : MonoBehaviour
     private readonly int runAnimHash = Animator.StringToHash("run");
 
     private int moveInput;
+    private bool isSprint;
 
     [SerializeField] private UnityEvent OnJumpEvent; // pStat.OnGround
     [SerializeField] private UnityEvent<P_Stat> OnBasicAttackEvent; // pStat.CanUseSkill
@@ -40,7 +41,7 @@ public class P_InputHandler : MonoBehaviour
     {
         if (pStat.CanMove && input.inputIsActive)
         {
-            rb.linearVelocityX = moveInput * pStat.MoveSpeed;
+            rb.linearVelocityX = moveInput * (!isSprint ? pStat.MoveSpeed : pStat.RunSpeed);
 
             if (moveInput != 0 && moveInput != transform.localScale.x)
                 transform.localScale = new Vector3(moveInput, 1, 1);
@@ -70,6 +71,7 @@ public class P_InputHandler : MonoBehaviour
     private void OnSprint(InputValue value)
     {
         anim.SetBool(runAnimHash, (int)Mathf.Ceil(value.Get<float>()) == 1);
+        isSprint = (int)Mathf.Ceil(value.Get<float>()) == 1;
     }
     private void OnJump(InputValue value)
     {

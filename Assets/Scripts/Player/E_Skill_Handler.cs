@@ -23,6 +23,10 @@ public class E_Skill_Handler : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + Vector3.right * skillRequireRange);
     }
 
+    public bool P_Ready()
+    { 
+        return skill.State == Skill.SkillState.Ready;
+    }
     public bool Public_ActivateSkill()
     {
         if (skill.State != Skill.SkillState.Ready) return false;

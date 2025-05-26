@@ -4,11 +4,13 @@ using UnityEngine;
 public class SO_CharStat : ScriptableObject
 {
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float runSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private float maxHealth;
     [SerializeField] private float defenseValue;
 
     public float MoveSpeed { get { return moveSpeed; }}
+    public float RunSpeed { get { return runSpeed; }}
     public float JumpForce { get { return jumpForce; }}
     public float MaxHealth { get { return maxHealth; }}
     public float DefenseValue { get { return defenseValue; }}

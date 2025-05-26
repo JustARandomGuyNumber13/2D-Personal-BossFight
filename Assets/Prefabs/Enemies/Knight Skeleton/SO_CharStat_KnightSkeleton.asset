@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da98bc8a88a10d478a889eca77d87e6, type: 3}
   m_Name: SO_CharStat_KnightSkeleton
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 4
+  runSpeed: 9
   jumpForce: 0
   maxHealth: 100
   defenseValue: 2
