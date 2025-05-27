@@ -15,8 +15,15 @@ public class Skill_Dash : Skill
     {
         if (previousTarget == null || previousTarget != collision)
         {
-            previousTarget = collision;
-            health = previousTarget.GetComponent<Health_Handler>();
+            Health_Handler temp; collision.TryGetComponent<Health_Handler>(out temp);
+
+            if (temp != null)
+            {
+                previousTarget = collision;
+                health = temp;
+            }
+            else
+                return;
         }
         health.Public_DecreaseHealth(damage);
     }

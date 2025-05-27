@@ -14,8 +14,7 @@ public partial class DefenseAction : Action
     {
         if (!Agent.Value.P_SkillsAvailable())
         {
-            
-            Agent.Value.P_LookAtTarget();
+            Agent.Value.P_Defense();
             return Status.Success;
         }
         return Status.Failure;

@@ -24,7 +24,8 @@ public class E_Controller : MonoBehaviour
     public void P_Defense()
     {
         rb.linearVelocityX = 0;
-        anim.SetBool("defense", true);
+        eStat.Defending = true;
+        P_LookAtTarget();
     }
     public bool P_SkillsAvailable()
     {
@@ -52,6 +53,7 @@ public class E_Controller : MonoBehaviour
 
         if (result)
         {
+            eStat.Defending = false;
             rb.linearVelocityX = 0;
             anim.SetBool("defense", false);
             anim.SetFloat("moveSpeed", 0);
@@ -82,6 +84,7 @@ public class E_Controller : MonoBehaviour
         {
             rb.linearVelocityX = (isWalk ? eStat.MoveSpeed : eStat.RunSpeed) * transform.lossyScale.x;
             anim.SetFloat("moveSpeed", isWalk ? 0.2f : 1f);
+            eStat.Defending = false;
         }
         else
         {

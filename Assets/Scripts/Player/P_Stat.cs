@@ -13,6 +13,7 @@ public class P_Stat : MonoBehaviour
     public bool OnGround { get; set; }
     public bool CanMove { get; private set; } = true;
     public bool CanUseSkill { get; private set; } = true;
+    public bool Defending;
 
     private float lifeStealPercentage;
     private float moveSpeedPercentage;
