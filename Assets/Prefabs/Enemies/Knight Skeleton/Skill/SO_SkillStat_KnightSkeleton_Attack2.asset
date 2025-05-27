@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 
   skillImage: {fileID: 0}
-  skillDelay: 0
+  skillDelay: 0.3
   skillDuration: 0.32
   skillCD: 20

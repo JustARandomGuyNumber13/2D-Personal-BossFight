@@ -18,13 +18,18 @@ public partial class AttackAction : Action
 
     protected override Status OnStart()
     {
-        if (!active && !CD && Target.Value.P_UseSkill(Skill))
+        if (!active && !CD)
         {
-            timer = Target.Value.P_GetSkill(Skill).SkillCD;
-            active = true;
-            CD.Value = true;
-            Defense.Value = false;
-            return Status.Success;
+            bool success = Target.Value.P_UseSkill(Skill);
+            if (success)
+            {
+                Target.Value.P_LookAtTarget();
+                timer = Target.Value.P_GetSkill(Skill).SkillCD;
+                active = true;
+                CD.Value = true;
+                Defense.Value = false;
+                return Status.Success;
+            }
         }
 
         if (!active)

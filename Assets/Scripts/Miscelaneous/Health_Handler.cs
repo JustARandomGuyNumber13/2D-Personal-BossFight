@@ -8,16 +8,18 @@ public class Health_Handler : MonoBehaviour
     private float health;
     private P_Stat pStat;
 
-    [SerializeField] private UnityEvent<float> OnHealthDecreaseEvent; // health
-    [SerializeField] private UnityEvent<float> OnHealthIncreaseEvent; // health
+    public UnityEvent<float> OnHealthDecreaseEvent; // health
+    public UnityEvent<float> OnHealthIncreaseEvent; // health
 
     private void Start()
     {
         health = charStat.MaxHealth;
         pStat = GetComponent<P_Stat>();
-        health /= 2;
     }
-
+    public float P_GetMaxHealth()
+    {
+        return charStat.MaxHealth;
+    }
     public void Public_DecreaseHealth(float amount)
     {
         float dmgAmount = amount - charStat.DefenseValue;

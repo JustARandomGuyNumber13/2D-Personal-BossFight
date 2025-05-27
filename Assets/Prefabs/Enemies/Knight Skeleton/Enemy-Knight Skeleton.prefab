@@ -81,8 +81,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   State: 0
-  targetLayerName: 
-  dmgAmount: 0
+  targetLayerName: Player
+  dmgAmount: 10
   atkBoxSize: {x: 3.82, y: 3.22, z: 0}
   atkBoxOffset: {x: 1.66, y: -0.79, z: 0}
   gizmosColor: {r: 1, g: 0, b: 0, a: 1}
@@ -295,7 +295,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.15, y: -2.4}
+  m_Offset: {x: -0.15, y: -2.25}
   m_Size: {x: 1, y: 3.5}
   m_Direction: 0
 --- !u!95 &6372571219383317057
@@ -536,8 +536,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   State: 0
-  targetLayerName: 
-  dmgAmount: 0
+  targetLayerName: Player
+  dmgAmount: 10
   atkBoxSize: {x: 4.2, y: 2.78, z: 0}
   atkBoxOffset: {x: 1.8, y: -0.58, z: 0}
   gizmosColor: {r: 1, g: 0, b: 0, a: 1}
@@ -640,8 +640,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   State: 0
-  targetLayerName: 
-  dmgAmount: 0
+  targetLayerName: Player
+  dmgAmount: 10
   atkBoxSize: {x: 2.95, y: 2.79, z: 0}
   atkBoxOffset: {x: 1.81, y: -1.64, z: 0}
   gizmosColor: {r: 1, g: 0, b: 0, a: 1}

@@ -31,6 +31,6 @@ public class E_Skill_Handler : MonoBehaviour
     {
         if (skill.State != Skill.SkillState.Ready) return false;
         skill.Public_ActivateSkill(pStat);
-        return skill.State == Skill.SkillState.Activating;
+        return true;
     }
 }
