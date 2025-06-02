@@ -717,6 +717,7 @@ MonoBehaviour:
   groundCheckBoxSize: {x: 1, y: 0.1, z: 0}
   groundCheckBoxOffset: {x: 0, y: -2.55, z: 0}
   groundCheckBoxColor: {r: 0, g: 0, b: 1, a: 1}
+  Defending: 0
   OnLandEvent:
     m_PersistentCalls:
       m_Calls:
@@ -832,10 +833,37 @@ MonoBehaviour:
   charStat: {fileID: 11400000, guid: dbb27d0ba81b818438f0fc81849522d9, type: 2}
   OnHealthDecreaseEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4155688295090687985}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: hurt
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHealthIncreaseEvent:
     m_PersistentCalls:
       m_Calls: []
+  OnDieEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4155688295090687985}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: dead
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8267923730160857328
 GameObject:
   m_ObjectHideFlags: 0

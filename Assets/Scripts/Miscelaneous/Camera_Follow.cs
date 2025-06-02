@@ -3,6 +3,7 @@ using UnityEngine;
 public class Camera_Follow : MonoBehaviour
 {
     [SerializeField] private Transform p;
+    [SerializeField] private Transform other;
     [SerializeField] private float xBound;
 
     private Camera cam;
@@ -23,7 +24,10 @@ public class Camera_Follow : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(Vector3.zero - Vector3.right * xBound, Vector3.zero + Vector3.right * xBound);
     }
-
+    private float OffSet()
+    { 
+        
+    }
     private void LateUpdate()
     {
         if (IsInBoundary())
